@@ -1,0 +1,81 @@
+@use "./variables" as *;
+@use "./components/cta-btn";
+@use "./layout/header";
+
+.hero {
+    display: flex;
+
+    &_left_text_container {
+        display: flex;
+        flex-direction: column;
+        gap: 76px;
+
+        h1 {
+            color: $primary_color;
+            font-size: clamp(74px, 8vw, 140px);
+            letter-spacing: -2.8px;
+            line-height: clamp(74px, 8vw, 126px);
+        }
+
+        & p {
+            font-size: clamp(16px, 2vw, 28px);
+            width: 470px;
+            color: $primary_color;
+            position: relative;
+            padding-left: 32pt;
+
+            &::before{
+                content: "";
+                position: absolute;
+                background-color: #f5cb5c;
+                left: 0px;
+                top: 0;
+                bottom: 0;
+                width: 8px;
+                border-radius: 999px;
+            }
+
+            span{
+                font-style: italic;
+            }
+        }
+    }
+
+    &_left {
+        flex: 1;
+        a{
+           max-width: 310px;
+           text-align: center;
+           height: 48px;
+           place-content: center;
+           margin-top: 48px;
+           
+        }
+    }
+
+    &_right{
+        flex: 1;
+        position: relative;
+        
+        img{
+            width: 35vw;
+            position: fixed;
+            animation-timeline: scroll();
+            animation-name: changeOpacityOnScroll;
+            animation-duration: 1ms; 
+            animation-direction: alternate;
+            animation-timeline: scroll();
+            z-index: -1;
+        }
+    }
+}
+
+
+@keyframes changeOpacityOnScroll {
+  0% {
+    opacity: 1;
+  }
+  20%,100% {
+    opacity:  0.2;
+  }
+}

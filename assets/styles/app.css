@@ -16,7 +16,7 @@ ul {
   list-style: none;
 }
 
-.default_padding_X {
+.default_padding_x {
   padding-inline: 140px;
 }
 
@@ -50,9 +50,11 @@ ul {
 }
 .cta_btn_inactive {
   background-color: #242423;
+  color: #cfdbd5;
 }
 .cta_btn_inactive:hover {
   background-color: #e8eddf;
+  color: #242423;
 }
 
 .app_header {
@@ -93,4 +95,72 @@ ul {
   gap: 10px;
   border-color: #e8eddf;
   padding: 8px 32px;
+}
+
+.hero {
+  display: flex;
+}
+.hero_left_text_container {
+  display: flex;
+  flex-direction: column;
+  gap: 76px;
+}
+.hero_left_text_container h1 {
+  color: #e8eddf;
+  font-size: clamp(74px, 8vw, 140px);
+  letter-spacing: -2.8px;
+  line-height: clamp(74px, 8vw, 126px);
+}
+.hero_left_text_container p {
+  font-size: clamp(16px, 2vw, 28px);
+  width: 470px;
+  color: #e8eddf;
+  position: relative;
+  padding-left: 32pt;
+}
+.hero_left_text_container p::before {
+  content: "";
+  position: absolute;
+  background-color: #f5cb5c;
+  left: 0px;
+  top: 0;
+  bottom: 0;
+  width: 8px;
+  border-radius: 999px;
+}
+.hero_left_text_container p span {
+  font-style: italic;
+}
+.hero_left {
+  flex: 1;
+}
+.hero_left a {
+  max-width: 310px;
+  text-align: center;
+  height: 48px;
+  place-content: center;
+  margin-top: 48px;
+}
+.hero_right {
+  flex: 1;
+  position: relative;
+}
+.hero_right img {
+  width: 35vw;
+  position: fixed;
+  animation-timeline: scroll();
+  animation-name: changeOpacityOnScroll;
+  animation-duration: 1ms;
+  animation-direction: alternate;
+  animation-timeline: scroll();
+  z-index: -1;
+}
+
+@keyframes changeOpacityOnScroll {
+  0% {
+    opacity: 1;
+  }
+  20%, 100% {
+    opacity: 0.2;
+  }
 }/*# sourceMappingURL=app.css.map */
