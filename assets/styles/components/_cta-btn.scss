@@ -1,6 +1,5 @@
 @use "../variables" as *;
 
-//CTA BUTTON
 
 .cta_btn{
    display: flex;
@@ -38,9 +37,11 @@
 
     &_inactive{
         background-color: $black_default;
+        color: #cfdbd5;
 
         &:hover{
           background-color: $primary_color;
+          color: $black_default;
         }
     }
 }
