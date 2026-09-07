@@ -1,0 +1,46 @@
+@use "../variables" as *;
+
+//CTA BUTTON
+
+.cta_btn{
+   display: flex;
+   align-items: center;
+   border: 2px solid;
+   transition: $defaultTransition;
+   border-radius: 24px;
+   text-decoration: none;
+
+   .wa path{
+       transition: fill $defaultTransition;
+   }
+
+   &_active{
+       background-color: $primary_color;
+       color: $black_default;
+
+       &:hover{
+         background-color: $black_default;
+         color: $primary_color;
+
+         & .wa_tel{
+           fill: #F5CB5C;
+         }
+
+         & .wa_bg{
+           fill:$black_default;
+         }
+
+         & .wa_border{
+           fill:$primary_color;
+         }
+       }
+   }
+
+    &_inactive{
+        background-color: $black_default;
+
+        &:hover{
+          background-color: $primary_color;
+        }
+    }
+}
