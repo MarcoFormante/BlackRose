@@ -24,7 +24,7 @@
             position: relative;
             padding-left: 32pt;
 
-            &::before{
+            &::before {
                 content: "";
                 position: absolute;
                 background-color: #f5cb5c;
@@ -35,7 +35,7 @@
                 border-radius: 999px;
             }
 
-            span{
+            span {
                 font-style: italic;
             }
         }
@@ -43,26 +43,25 @@
 
     &_left {
         flex: 1;
-        a{
-           max-width: 310px;
-           text-align: center;
-           height: 48px;
-           place-content: center;
-           margin-top: 48px;
-           
+        a {
+            max-width: 310px;
+            text-align: center;
+            height: 48px;
+            place-content: center;
+            margin-top: 48px;
         }
     }
 
-    &_right{
+    &_right {
         flex: 1;
         position: relative;
-        
-        img{
+
+        img {
             width: 35vw;
             position: fixed;
             animation-timeline: scroll();
             animation-name: changeOpacityOnScroll;
-            animation-duration: 1ms; 
+            animation-duration: 1ms;
             animation-direction: alternate;
             animation-timeline: scroll();
             z-index: -1;
@@ -70,12 +69,259 @@
     }
 }
 
-
 @keyframes changeOpacityOnScroll {
-  0% {
-    opacity: 1;
-  }
-  20%,100% {
-    opacity:  0.2;
-  }
+    0% {
+        opacity: 1;
+    }
+    20%,
+    100% {
+        opacity: 0.2;
+    }
+}
+
+.section_heading {
+    h2 {
+        color: $secondary_color;
+        display: flex;
+        flex-direction: column;
+        gap: 64px;
+        font-size: 16px;
+
+        span {
+            color: $primary_color;
+            font-size: 48px;
+        }
+    }
+    hr {
+        border: 2px solid #584e31;
+        border-radius: 24px;
+        margin-top: 24px;
+        width: 96px;
+    }
+}
+
+.swiper {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 16px;
+    user-select: none;
+    position: relative;
+}
+
+.swiper-wrapper {
+    &:active {
+        cursor: grabbing;
+    }
+    &::selection {
+        background-color: transparent;
+    }
+}
+
+.slider {
+    overflow: hidden;
+}
+
+.slider-bottom {
+    margin-top: 16px;
+    overflow: hidden;
+}
+
+.swiper-slide {
+    width: 260px;
+    height: 345px;
+    border-radius: 16px;
+    position: relative;
+    cursor: pointer;
+
+    &:active {
+        cursor: grabbing;
+    }
+
+    &::after {
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-color: $black_default;
+        transition: all 0.3s;
+        opacity: 0;
+    }
+
+    &:hover {
+        &::after {
+            opacity: 0.5;
+        }
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 16px;
+    }
+
+    &-relative {
+        position: relative;
+    }
+}
+
+.slider-margin-top {
+    margin-top: 24px;
+}
+
+.swiper-navigation-container {
+    display: flex;
+    right: 0;
+    height: 48px;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 24px;
+    gap: 16px;
+    padding-right: 140px;
+
+    .slider-buttons-container {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    &-between {
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+.slider-button-prev,
+.slider-button-next {
+    background-color: #333533;
+    width: 96px;
+    height: 48px;
+    max-height: 48px;
+    align-items: center;
+    border-radius: 24px;
+    margin-top: unset;
+    transition: border-color 0.3s ease-in-out;
+    border: 2px solid;
+    color: transparent;
+    display: flex;
+    align-items: center;
+    appearance: none;
+    cursor: pointer;
+
+    svg {
+        margin-left: 15px;
+
+        g {
+            transition: fill 0.3s ease-in-out;
+        }
+    }
+
+    &:hover {
+        border-color: $yellow;
+
+        g[fill="#818784"] {
+            fill: $yellow;
+        }
+    }
+
+    .swiper-navigation-icon {
+        height: 48px;
+    }
+}
+
+.slider-button-next {
+    transform: rotate(180deg);
+    border-color: #818784;
+}
+
+.section-margin-top {
+    margin-top: 126px;
+}
+
+//* ARTISTS SECTION */
+#artists {
+    .slider {
+        position: relative;
+    }
+
+    .swiper-slide {
+        width: 397px;
+        height: 560px;
+        transition: all 0.3s;
+
+        &-active,&-prev {
+            opacity: 0.2;
+        }
+    }
+
+    .slider-artist {
+        h3 {
+            color: $primary_color;
+            font-size: 32px;
+        }
+    }
+
+    .swiper-slide-artist {
+        width: 397px - 15px;
+        height: 560px - 15px;
+        position: absolute;
+        bottom: 5px;
+        left: 5px;
+        z-index: 100;
+        margin-right: 16px;
+        border-radius: 16px;
+
+        &-name {
+            color: #e8eddf;
+            font-size: 80px;
+            font-weight: 900;
+            line-height: 85%;
+        }
+
+        &-info {
+            position: absolute;
+            left: 18px;
+            top: 18px;
+        }
+
+        &-socialmedias {
+            background-color: $primary_color;
+            display: flex;
+            flex-direction: column;
+            width: 48px;
+            height: 168px;
+            border-radius: 24px;
+            margin-top: 42px;
+            justify-content: center;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+    }
+
+    .swiper-slide-artist-socialmedias {
+        svg {
+            path,
+            circle,
+            g {
+                transition:
+                    fill 0.3s,
+                    stroke 0.3s;
+            }
+            &:hover {
+                .fill-black {
+                    fill: $black_default;
+                }
+                .fill-white {
+                    fill: $primary_color;
+                }
+                .stroke-white {
+                    stroke: $primary_color;
+                }
+            }
+        }
+    }
 }
