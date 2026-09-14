@@ -336,15 +336,15 @@
             gap: 16px 17px;
             grid-template-columns: repeat(3, 536px);
             grid-template-rows: 326px 326px 260px 260px 260px 260px;
-            grid-template-areas: 
-            "a b c "        
-            "a b c "        
-            "d e f "        
-            "g h f "        
-            "i l m "        
+            grid-template-areas:
+            "a b c"
+            "a b c"
+            "d e f"
+            "g h f"
+            "i l m"
             "i n o";
         }
-          
+
         &-margin-top{
             margin-top: 16px;
         }
