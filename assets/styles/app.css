@@ -390,4 +390,84 @@ ul {
 }
 #artists .swiper-slide-artist-socialmedias svg:hover .stroke-white {
   stroke: #e8eddf;
+}
+
+#studio .studio-images {
+  margin-top: 48px;
+}
+#studio .studio-images-container {
+  display: grid;
+  gap: 16px 17px;
+  grid-template-columns: repeat(3, 536px);
+  grid-template-rows: 326px 326px 260px 260px 260px 260px;
+  grid-template-areas: "a b c " "a b c " "d e f " "g h f " "i l m " "i n o";
+}
+#studio .studio-images-margin-top {
+  margin-top: 16px;
+}
+#studio .studio-images .studio-text-card-container .studio-images-item-text {
+  color: #e8eddf;
+  font-family: Lato_Light;
+  font-size: clamp(20px, 1.7vw, 40px);
+  font-style: normal;
+  font-weight: 300;
+  letter-spacing: 0.4px;
+}
+#studio .studio-images .studio-text-card-container .cta_btn {
+  width: 310px;
+  font-size: 14px;
+  height: 48px;
+  text-align: center;
+  justify-content: center;
+  margin-top: 116px;
+}
+#studio .studio-images-item {
+  height: 100%;
+  width: 100%;
+}
+#studio .studio-images-item img {
+  height: 100%;
+  border-radius: 16px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100%;
+}
+#studio .studio-images .grid-1 {
+  grid-area: a;
+}
+#studio .studio-images .grid-2 {
+  grid-area: b;
+}
+#studio .studio-images .grid-3 {
+  grid-area: c;
+}
+#studio .studio-images .grid-4 {
+  grid-area: d;
+}
+#studio .studio-images .grid-5 {
+  grid-area: e;
+}
+#studio .studio-images .grid-6 {
+  grid-area: f;
+}
+#studio .studio-images .grid-7 {
+  grid-area: g;
+}
+#studio .studio-images .grid-8 {
+  grid-area: h;
+}
+#studio .studio-images .grid-9 {
+  grid-area: i;
+}
+#studio .studio-images .grid-10 {
+  grid-area: l;
+}
+#studio .studio-images .grid-11 {
+  grid-area: m;
+}
+#studio .studio-images .grid-12 {
+  grid-area: n;
+}
+#studio .studio-images .grid-13 {
+  grid-area: o;
 }/*# sourceMappingURL=app.css.map */

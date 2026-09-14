@@ -325,3 +325,117 @@
         }
     }
 }
+
+
+#studio{
+    .studio-images{
+        margin-top: 48px;
+
+        &-container{
+            display: grid;
+            gap: 16px 17px;
+            grid-template-columns: repeat(3, 536px);
+            grid-template-rows: 326px 326px 260px 260px 260px 260px;
+            grid-template-areas: 
+            "a b c "        
+            "a b c "        
+            "d e f "        
+            "g h f "        
+            "i l m "        
+            "i n o";
+        }
+          
+        &-margin-top{
+            margin-top: 16px;
+        }
+
+        .studio-text-card-container{
+
+            .studio-images-item-text{
+                color: $primary_color;
+                font-family: Lato_Light;
+                font-size: clamp(20px, 1.7vw, 40px);
+                font-style: normal;
+                font-weight: 300;
+                letter-spacing: .4px;
+            }
+
+            .cta_btn{
+                width: 310px;
+                font-size: 14px;
+                height: 48px;
+                text-align: center;
+                justify-content: center;
+                margin-top: 116px;
+            }
+        }
+
+        &-item{
+            //  height: 260px;
+            height: 100%;
+            width: 100%;
+            img{
+                height: 100%;
+                border-radius: 16px;
+                object-fit: cover;
+                width: 100%;
+            }
+
+            &-big{
+                // height: 668px;
+            }
+        }
+
+        .grid-1{
+            grid-area: a;
+        }
+
+        .grid-2{
+            grid-area: b;
+        }
+
+        .grid-3{
+            grid-area: c;
+        }
+
+        .grid-4{
+            grid-area: d ;
+        }
+
+        .grid-5{
+            grid-area: e;
+        }
+
+        .grid-6{
+            grid-area: f;
+        }
+
+        .grid-7{
+            grid-area: g;
+        }
+
+        .grid-8{
+            grid-area: h;
+        }
+
+        .grid-9{
+            grid-area: i;
+        }
+
+        .grid-10{
+            grid-area: l;
+        }
+
+        .grid-11{
+            grid-area: m;
+        }
+
+        .grid-12{
+            grid-area: n;
+        }
+
+        .grid-13{
+            grid-area: o;
+        }
+    }
+}
