@@ -762,4 +762,41 @@ ul {
 }
 #info #info-studio .map iframe {
   border-radius: 16px;
+}
+
+.footer {
+  margin-top: 70px;
+  margin-bottom: 50px;
+}
+.footer .inner-footer {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  color: #e8eddf;
+}
+.footer .inner-footer a {
+  color: #e8eddf;
+}
+.footer .inner-footer .footer-icons-smnet {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.footer .inner-footer .footer-icons-smnet .footer-icon {
+  width: 32px;
+  height: 32px;
+}
+.footer .inner-footer .footer-icons-smnet .footer-icon div {
+  width: 100%;
+  height: 100%;
+}
+.footer .inner-footer .footer-icons-smnet .footer-icon div.wa {
+  background: url("../images/icon_footer_WA.svg") no-repeat;
+}
+.footer .inner-footer .footer-icons-smnet .footer-icon div.insta {
+  background: url("../images/icon_footer_IG.svg") no-repeat;
+}
+.footer .inner-footer .footer-icons-smnet .footer-icon div.facebook {
+  background: url("../images/icon_footer_fb.svg") no-repeat;
 }/*# sourceMappingURL=app.css.map */
