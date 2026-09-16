@@ -3,7 +3,7 @@
         <twig:sectionheading title="INFO E CONTATTI" subTitle="Contattaci" />
     </div>
 
-    <div class="info-container default_padding_left">
+    <div class="info-container default_padding_left" data-controller="form">
         <div>
             <h3>PRENOTA UN APPUNTAMENTO</h3>
             <P class="grey-text form-desc">
@@ -22,7 +22,7 @@
                 class="form-input-container-relative form-input-container-small-input"
             >
                 {{ form_label(form.day) }}
-                {{ form_widget(form.day) }}
+                {{ form_widget(form.day,{'attr':{'data-form-target':'datePicker'}}) }}
             </div>
             <div
                 class="form-input-container-relative form-input-container-small-input"
@@ -35,7 +35,7 @@
                 class="form-input-container-relative form-input-container-small-input"
             >
                 {{ form_label(form.time) }}
-                {{ form_widget(form.time) }}
+                {{ form_widget(form.time,{'attr':{'data-form-target':'timePicker'}}) }}
             </div>
             <div
                 class="form-input-container-relative form-input-container-big-input"
@@ -53,11 +53,12 @@
                         width="30"
                         height="40"
                         alt=""
+                        data-form-target="fileImage"
                     />
                 </div>
                 
                 {{ form_label(form.file) }}
-                {{ form_widget(form.file) }}
+                {{ form_widget(form.file,{'attr':{'data-form-target':'fileInput'}})}}
             </div>
 
             <div
@@ -159,60 +160,3 @@
     </div>
 </div>
 </section>
-<script>
-    const datePicker = document.querySelector(".picker");
-    const timePicker = document.querySelector(".time-picker");
-
-    handleInput(datePicker);
-    handleInput(timePicker);
-
-    datePicker.onchange = () => {
-        if (datePicker.value) {
-            datePicker.classList.add("picker-newDate");
-            const date = new Date(datePicker.value);
-            datePicker.setAttribute("data-date", date.toLocaleDateString());
-        } else {
-            datePicker.removeAttribute("data-date");
-            datePicker.setAttribute("class", "picker");
-        }
-        datePicker.classList.remove("focus");
-    };
-
-    timePicker.oninput = () => {
-        if (timePicker.value) {
-            timePicker.dataset.time = timePicker.value;
-        }
-    };
-
-    timePicker.onchange = () => {
-        if (timePicker.value) {
-            timePicker.setAttribute("class", "time-picker time-picker-newTime");
-            timePicker.dataset.time = timePicker.value;
-        } else {
-            timePicker.setAttribute("class", "time-picker");
-        }
-        datePicker.classList.remove("focus");
-    };
-
-    function handleInput(input) {
-        input.onclick = () => {
-            input.classList.add("focus");
-        };
-
-        input.onblur = () => {
-            input.classList.remove("focus");
-        };
-    }
-
-    const fileInput = document.querySelector("input[type=file]");
-    fileInput.onchange = () => {
-        const imgElement = document.querySelector(".file-image img");
-        if (fileInput.files[0]) {
-            console.log(fileInput.files[0]);
-            const image = URL.createObjectURL(fileInput.files[0]);
-            imgElement.src = image;
-        } else {
-            imgElement.src = "";
-        }
-    };
-</script>
