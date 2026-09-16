@@ -1,10 +1,11 @@
 @use "./variables" as *;
 @use "./components/cta-btn";
-@use "./layout/header";
+@use "./components/header";
 
 .hero {
     display: flex;
-
+    margin-top: 60px;
+    
     &_left_text_container {
         display: flex;
         flex-direction: column;
@@ -63,8 +64,8 @@
             animation-name: changeOpacityOnScroll;
             animation-duration: 1ms;
             animation-direction: alternate;
-            animation-timeline: scroll();
             z-index: -1;
+            top: 120px;
         }
     }
 }
@@ -75,7 +76,7 @@
     }
     20%,
     100% {
-        opacity: 0.2;
+        opacity: 0.1;
     }
 }
 
@@ -271,7 +272,7 @@
         position: absolute;
         bottom: 5px;
         left: 5px;
-        z-index: 100;
+        z-index: 10;
         margin-right: 16px;
         border-radius: 16px;
 
@@ -371,7 +372,6 @@
         }
 
         &-item{
-            //  height: 260px;
             height: 100%;
             width: 100%;
             img{
@@ -379,10 +379,6 @@
                 border-radius: 16px;
                 object-fit: cover;
                 width: 100%;
-            }
-
-            &-big{
-                // height: 668px;
             }
         }
 
@@ -699,7 +695,6 @@
     }
 
     address{
-        height: 100%;
         ul{
             height: inherit;
             display: flex;
@@ -855,6 +850,4 @@
         }
     }
 }
-
-
 
