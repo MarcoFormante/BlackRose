@@ -1,11 +1,29 @@
 @use "../variables" as *;
 
+   
+
+
 .app_header{
     background-color: $black_default;
     height: 98px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 20;
+    transition: transform 0.3s;
+    transform: translate(0, 0);
+
+    @container sticky-header scroll-state(scrolled: bottom) {
+        transform: translate(0, -100%);
+    }
+
+    @container sticky-header scroll-state(not (scrollable: top)) {
+        transform: translate(0, 0) !important;
+    }
+
 
     img{
         width: 120px;

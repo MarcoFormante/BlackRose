@@ -6,6 +6,8 @@
 
 html {
   max-width: 1920px;
+  container-name: sticky-header;
+  container-type: scroll-state;
 }
 
 body {
@@ -75,6 +77,22 @@ ul {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 20;
+  transition: transform 0.3s;
+  transform: translate(0, 0);
+}
+@container sticky-header scroll-state(scrolled: bottom) {
+  .app_header {
+    transform: translate(0, -100%);
+  }
+}
+@container sticky-header scroll-state(not (scrollable: top)) {
+  .app_header {
+    transform: translate(0, 0) !important;
+  }
 }
 .app_header img {
   width: 120px;
@@ -111,6 +129,7 @@ ul {
 
 .hero {
   display: flex;
+  margin-top: 60px;
 }
 .hero_left_text_container {
   display: flex;
@@ -164,8 +183,8 @@ ul {
   animation-name: changeOpacityOnScroll;
   animation-duration: 1ms;
   animation-direction: alternate;
-  animation-timeline: scroll();
   z-index: -1;
+  top: 120px;
 }
 
 @keyframes changeOpacityOnScroll {
@@ -173,7 +192,7 @@ ul {
     opacity: 1;
   }
   20%, 100% {
-    opacity: 0.2;
+    opacity: 0.1;
   }
 }
 .section_heading h2 {
@@ -354,7 +373,7 @@ ul {
   position: absolute;
   bottom: 5px;
   left: 5px;
-  z-index: 100;
+  z-index: 10;
   margin-right: 16px;
   border-radius: 16px;
 }
@@ -689,9 +708,6 @@ ul {
   width: 100%;
   justify-content: center;
   cursor: pointer;
-}
-#info address {
-  height: 100%;
 }
 #info address ul {
   height: inherit;
