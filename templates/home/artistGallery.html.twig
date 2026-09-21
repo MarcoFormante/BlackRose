@@ -10,8 +10,8 @@
         />
     </div>
 
-    {# INSERT LOOP , DATA FROM DB  #}
-
+    {#  LOOP , DATA FROM DB  #}
+    {% for artist in artists %}
     <div
         class="swiper-artist slider-margin-top slider slider-artist"
         data-swiper-target="slider" 
@@ -21,185 +21,30 @@
             swiper-navigation-container-relative swiper-navigation-container-between
             
         >
-            <h3>#Stevex</h3>
+            <h3>#{{artist.name}}</h3>
         </twig:SliderButtons>
 
-        <twig:SliderArtistCard/>
+        <twig:SliderArtistCard 
+            name="{{artist.name}}" 
+            splitName="{{artist.splitName}}"
+            images="{{artist.images|json_encode()}}" 
+            whatsapp="{{artist.whatsapp}}" 
+            instagram="{{artist.insta}}" 
+            facebook="{{artist.facebook}}"
+        />
 
         <div class="swiper-wrapper">
             <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
+                <img src="/uploads/artists/{{artist.profileImage}}" alt="" >
+                
             </div>
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
+
+            {% for image in artist.images %}
+                <div class="swiper-slide">
+                    <img src="/uploads/artistImages/{{image.path}}" alt="">
+                </div>
+            {% endfor %}
         </div>
     </div>
-
-
-    <div
-        class="swiper-artist slider-margin-top slider slider-artist"
-        data-swiper-target="slider" 
-        data-controller="swiper"
-    >
-        <twig:SliderButtons
-            swiper-navigation-container-relative swiper-navigation-container-between artist-slider-margin-top
-            
-        >
-            <h3>#Daniela</h3>
-        </twig:SliderButtons>
-
-        <twig:SliderArtistCard/>
-
-        <div class="swiper-wrapper">
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-        </div>
-    </div>
+    {% endfor %}
 </section>
