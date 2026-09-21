@@ -39,6 +39,12 @@ class Artist
     #[ORM\OneToMany(targetEntity: ArtistImage::class, mappedBy: 'Artist', orphanRemoval: true)]
     private Collection $artistImage;
 
+    #[ORM\Column(length: 255)]
+    private ?string $nameSyllables = null;
+
+    #[ORM\Column]
+    private ?int $position = null;
+
     public function __construct()
     {
         $this->artistImage = new ArrayCollection();
@@ -147,6 +153,35 @@ class Artist
                 $artistImage->setArtist(null);
             }
         }
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getName(); 
+    }
+
+    public function getNameSyllables(): ?string
+    {
+        return $this->nameSyllables;
+    }
+
+    public function setNameSyllables(string $nameSyllables): static
+    {
+        $this->nameSyllables = $nameSyllables;
+
+        return $this;
+    }
+
+    public function getPosition(): ?int
+    {
+        return $this->position;
+    }
+
+    public function setPosition(int $position): static
+    {
+        $this->position = $position;
 
         return $this;
     }
