@@ -6,7 +6,7 @@ use App\Repository\ArtistImageRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ArtistImageRepository::class)]
-class ArtistImage
+class ArtistImage extends AbstractEntity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -19,7 +19,7 @@ class ArtistImage
     #[ORM\ManyToOne(inversedBy: 'artistImage')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Artist $Artist = null;
-
+    
     public function getId(): ?int
     {
         return $this->id;
