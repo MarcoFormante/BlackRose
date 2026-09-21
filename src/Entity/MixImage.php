@@ -6,7 +6,7 @@ use App\Repository\MixImageRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MixImageRepository::class)]
-class MixImage
+class MixImage extends AbstractEntity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
