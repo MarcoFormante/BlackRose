@@ -15,29 +15,19 @@ class ArtistImageRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, ArtistImage::class);
     }
+   /**
+     * Retrieves all images associated with a specific artist ID.
+     *
+     * @param int $id The ID of the artist.
+     * @return ArtistImage[]
+     */
+   public function findImagesByArtistId(int $id): array
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.Artist = :id')
+            ->setParameter('id', $id)   
+            ->getQuery()
+            ->getResult();
+    }
 
-//    /**
-//     * @return ArtistImage[] Returns an array of ArtistImage objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('a.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?ArtistImage
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }
