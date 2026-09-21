@@ -1,16 +1,6 @@
 
 {% extends '@!EasyAdmin/layout.html.twig' %}
-
-    {% block layout %}
-    <div data-controller="admin">
-        {% block main %}
-         
-      
-        {% endblock %}
-    </div>
-    {% endblock %}
-
-
+   
 {% block importmap %}
     {{ parent() }}
     {{ importmap('admin') }}
