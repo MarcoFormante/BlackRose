@@ -17,7 +17,7 @@ class OpeningTime
     private ?string $lunedi = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $venerdi = null;
+    private ?string $sabato = null;
 
     #[ORM\Column(length: 255)]
     private ?string $domenica = null;
@@ -39,14 +39,14 @@ class OpeningTime
         return $this;
     }
 
-    public function getVenerdi(): ?string
+    public function getSabato(): ?string
     {
-        return $this->venerdi;
+        return $this->sabato;
     }
 
-    public function setVenerdi(string $venerdi): static
+    public function setSabato(string $sabato): static
     {
-        $this->venerdi = $venerdi;
+        $this->sabato = $sabato;
 
         return $this;
     }
