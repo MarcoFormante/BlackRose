@@ -247,6 +247,7 @@
 #artists {
     .slider {
         position: relative;
+        margin-bottom: 80px;
     }
 
     .swiper-slide {
@@ -255,7 +256,7 @@
         transition: all 0.3s;
 
         &-active,&-prev {
-            opacity: 0.2;
+            opacity: 0.3;
         }
     }
 
@@ -281,6 +282,8 @@
             font-size: 80px;
             font-weight: 900;
             line-height: 85%;
+            text-transform: uppercase;
+            user-select: none;
         }
 
         &-info {

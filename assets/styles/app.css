@@ -354,6 +354,7 @@ ul {
 
 #artists .slider {
   position: relative;
+  margin-bottom: 80px;
 }
 #artists .swiper-slide {
   width: 397px;
@@ -361,7 +362,7 @@ ul {
   transition: all 0.3s;
 }
 #artists .swiper-slide-active, #artists .swiper-slide-prev {
-  opacity: 0.2;
+  opacity: 0.3;
 }
 #artists .slider-artist h3 {
   color: #e8eddf;
@@ -382,6 +383,10 @@ ul {
   font-size: 80px;
   font-weight: 900;
   line-height: 85%;
+  text-transform: uppercase;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 #artists .swiper-slide-artist-info {
   position: absolute;
