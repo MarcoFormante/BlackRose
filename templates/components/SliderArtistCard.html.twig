@@ -1,12 +1,19 @@
 <div class="swiper-slide-artist">
             <div class="swiper-slide-artist-info">
                 <span class="swiper-slide-artist-name">
-                    STE <br />
-                    VE <br />X <br />
+
+                    {% for syllable in splitName|split(',') %}
+                        {{syllable}} <br/>
+                    {% endfor %}
                 </span>
 
                 <div class="swiper-slide-artist-socialmedias">
-                    <a href="https://api.whatsapp.com/send?phone=393392191992">
+                    <a 
+                        href="{{whatsapp}}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title="Invia un messaggio a {{name}}"
+                    >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="32.283"
@@ -46,7 +53,11 @@
                             </g>
                         </svg>
                     </a>
-                    <a href="">
+                    <a href="{{instagram}}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title="Esplora il profilo instagram di {{name}}"
+                    >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="32.232"
@@ -94,7 +105,11 @@
                             </g>
                         </svg>
                     </a>
-                    <a href="">
+                    <a href="{{facebook}}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title="Esplora il profilo facebook di {{name}}"
+                    >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="32"
