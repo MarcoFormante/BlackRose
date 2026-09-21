@@ -15,160 +15,34 @@
     >
         <twig:SliderButtons/>
         <div class="swiper-wrapper">
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-        </div>
+            {% set halfLength = ((mixAlbum|length )  / 2)|round(0,'ceil') %}
+            {% for image in mixAlbum|slice(0, halfLength ) %}
+                <div class="swiper-slide">
+                   <img
+                       loading="lazy"
+                       src="/uploads/mixAlbum/{{image}}"
+                       alt
+                   />
+                </div>
+            {% endfor %}
+        </div>          
     </div>
 
     {# SECOND SLIDER #}
     <div class="swiper-mix slider-bottom" data-swiper-target="secondSlider">
         <div class="swiper-wrapper">
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-            <div class="swiper-slide">
-                <img
-                    loading="lazy"
-                    src="https://www.blackrosetattoomessina.it/assets/images/uploads/main/img-65a45c02956ae.webp"
-                    alt
-                />
-            </div>
-            <div class="swiper-slide"></div>
+            {% for image in mixAlbum|slice(halfLength) %}
+                <div class="swiper-slide">
+                   <img
+                       loading="lazy"
+                       src="/uploads/mixAlbum/{{image}}"
+                       alt
+                   />
+                </div>
+            {% endfor %}
+              {% if mixAlbum|length is not divisible by(2) %}
+             <div class="swiper-slide"></div>
+            {% endif %}
         </div>
     </div>
 </section>
