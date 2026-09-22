@@ -89,7 +89,10 @@ ul {
     transform: translate(0, -100%);
   }
 }
-@container sticky-header scroll-state(not (scrollable: top)) {
+.app_header {
+  /* stylelint-disable-next-line at-rule-no-unknown */
+}
+@container sticky-header scroll-state(not(scrollable: top)) {
   .app_header {
     transform: translate(0, 0) !important;
   }
@@ -771,7 +774,7 @@ ul {
   color: #e8eddf;
 }
 #info #info-studio .time-icon {
-  background: url(../images/icon_footer_IG.svg) no-repeat;
+  background: url(../images/icon_clock.svg) no-repeat;
   width: 32px;
   height: 32px;
 }
