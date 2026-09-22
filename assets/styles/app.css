@@ -35,6 +35,22 @@ ul {
   margin-top: 58px;
 }
 
+.letter-spacing-0 {
+  letter-spacing: -2.8px;
+}
+
+.letter-spacing-1 {
+  letter-spacing: 0.4px;
+}
+
+.letter-spacing-2 {
+  letter-spacing: 1.12px;
+}
+
+.letter-spacing-3 {
+  letter-spacing: 1.28px;
+}
+
 .cta_btn {
   display: flex;
   align-items: center;
@@ -439,10 +455,7 @@ ul {
 }
 #studio .studio-images .studio-text-card-container .studio-images-item-text {
   color: #e8eddf;
-  font-family: Lato_Light;
   font-size: clamp(20px, 1.7vw, 40px);
-  font-style: normal;
-  font-weight: 300;
   letter-spacing: 0.4px;
 }
 #studio .studio-images .studio-text-card-container .cta_btn {
@@ -456,6 +469,9 @@ ul {
 #studio .studio-images-item {
   height: 100%;
   width: 100%;
+}
+#studio .studio-images-item-text {
+  line-height: 1.5;
 }
 #studio .studio-images-item img {
   height: 100%;
@@ -824,4 +840,64 @@ ul {
 }
 .footer .inner-footer .footer-icons-smnet .footer-icon div.facebook {
   background: url("../images/icon_footer_fb.svg") no-repeat;
+}
+
+.lato-thin {
+  font-family: "Lato", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.lato-light {
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.lato-regular {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.lato-bold {
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.lato-black {
+  font-family: "Lato", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.lato-thin-italic {
+  font-family: "Lato", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.lato-light-italic {
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.lato-regular-italic {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.lato-bold-italic {
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.lato-black-italic {
+  font-family: "Lato", sans-serif;
+  font-weight: 900;
+  font-style: italic;
 }/*# sourceMappingURL=app.css.map */

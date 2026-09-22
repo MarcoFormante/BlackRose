@@ -5,15 +5,15 @@
 
     <div class="info-container default_padding_left" data-controller="form">
         <div>
-            <h3>PRENOTA UN APPUNTAMENTO</h3>
-            <P class="grey-text form-desc">
+            <h3 class="lato-black">PRENOTA UN APPUNTAMENTO</h3>
+            <P class="grey-text form-desc lato-regular">
                 Inserisci le info per l'appuntamento, ti è possibile allegare
                 anche immagini e lasciare un messaggio. Ti ricontatteremo il
                 prima possibile
             </P>
             {{ form_start(form) }}
             <div
-                class="form-input-container-relative form-input-container-small-input"
+                class="form-input-container-relative form-input-container-small-input lato-regular"
             >
                 {{ form_label(form.name) }}
                 {{ form_widget(form.name) }}
@@ -72,9 +72,9 @@
         </div>
 
 <div class="address-info">
-    <h3>INFORMAZIONI UTILI</h3>
+    <h3 class="lato-black">INFORMAZIONI UTILI</h3>
     <address itemscope itemtype="https://schema.org/TattooParlor" itemref="info-studio">
-        <ul>
+        <ul class="lato-regular">
             <li class="location-icon">
                 <div>
                     <span itemprop="name">Black Rose Tattoo Studio</span> - <br />
@@ -117,7 +117,7 @@
                     class="text-info-item text-info-item-link item-whatsapp-link"
                     title="Contattaci su WhatsApp"
                 >
-                    Contatta su WhatsApp
+                    Contattaci su WhatsApp
                 </a>
             </li>
             <li class="insta-icon">
@@ -126,7 +126,7 @@
                     target="_blank"
                     rel="noopener noreferrer"
                     class="text-info-item text-info-item-link item-instagram-link"
-                    title="Visita la nostra pagina Instagram"
+                    title="Visita il nostro Instagram"
                     itemprop="sameAs"
                 >
                     @BlackRoseTattoo
@@ -137,22 +137,22 @@
 </div>
 
 <div id="info-studio">
-    <h3>ORARI D'APERTURA</h3>
+    <h3 class="lato-black">ORARI D'APERTURA</h3>
     <div class="flex-container">
         <div class="info-container-item info-item-container">
             <div aria-hidden="true" class="time-icon"></div>
             <p class="text-info-item text-info-item-openTime">
-                <span itemprop="openingHours" content="Mo-Fr 10:00-17:30">
+                <span itemprop="openingHours" content="Mo-Fr 10:00-17:30" class="lato-regular">
                     <b>LUN-VEN:</b> <time datetime="10:00">10:00</time> - <time datetime="18:00">18:00</time>
                 </span><br />
-                <span itemprop="openingHours" content="Sa 10:00-17:30">
+                <span itemprop="openingHours" content="Sa 10:00-17:30" class="lato-regular">
                     <b>SAB:</b> <time datetime="10:00">10:00</time> - <time datetime="18:00">18:00</time>
                 </span><br />
                 <span><b>DOM:</b> Chiuso</span>
             </p>
         </div>
         <div>
-            <h3>DOVE TROVARCI</h3>
+            <h3 class="lato-black">DOVE TROVARCI</h3>
             <div class="map">
                 <iframe title="Trovaci su Google Maps" class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3135.4552668554447!2d15.541866392980303!3d38.19932569938028!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13144d71d2a7dff7%3A0x73f8435d376fc20f!2sBlack%20rose%20tattoo%20studio!5e0!3m2!1sen!2sfr!4v1701504103333!5m2!1sen!2sfr" width="600" height="450" allowfullscreen="true" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="border: 0px; width: 100%; z-index: 10; position: relative;"></iframe>
             </div>

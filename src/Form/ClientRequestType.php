@@ -27,6 +27,7 @@ class ClientRequestType extends AbstractType
                 ],
                 'attr' => [
                     'placeholder' => 'Nome',
+                    'class' => 'lato-regular'
                 ],
                 'constraints' => [
                     new Assert\NotBlank(message:"Il nome è obbligatorio"),
@@ -37,7 +38,7 @@ class ClientRequestType extends AbstractType
             ->add('day', DateType::class, [
                 'label' => "Scegli il giorno",
                 'attr' => [
-                    'class' => "picker",
+                    'class' => "picker lato-regular",
                 ],
                 'label_attr' => [
                     'class' => 'input-label-absolute hidden-label'
@@ -50,7 +51,8 @@ class ClientRequestType extends AbstractType
             ->add('email', EmailType::class, [
                 'label' => "E-mail",
                 'attr' => [
-                    'placeholder' => 'E-mail'
+                    'placeholder' => 'E-mail',
+                    'class' => 'lato-regular'
                 ],
                 'label_attr' => [
                     'class' => 'input-label-absolute hidden-label'
@@ -60,7 +62,7 @@ class ClientRequestType extends AbstractType
              ->add('time', TimeType::class, [
                 'label' => "Scegli l'orario",
                 'attr' => [
-                    'class' => "time-picker",
+                    'class' => "time-picker lato-regular",
                     'data-time' => "Scegli l'orario"
                 ],
                 'label_attr' => [
@@ -72,7 +74,8 @@ class ClientRequestType extends AbstractType
             ->add("message",TextareaType::class,[
                 'label' => "Scrivi un messaggio",
                 'attr' => [
-                    'placeholder' => "Scrivi un messaggio"
+                    'placeholder' => "Scrivi un messaggio",
+                    'class' => 'lato-regular'
                 ],
                 'label_attr' => [
                     'class' => 'input-label-absolute hidden-label'
@@ -84,6 +87,7 @@ class ClientRequestType extends AbstractType
                 'required' => false,
                 'attr' => [
                     'placeholder' => "Allega un' immagine",
+                    'class' => 'lato-regular'
                 ],
                 'label_attr' => [
                     'class' => 'input-label-absolute hidden-label'
@@ -93,7 +97,7 @@ class ClientRequestType extends AbstractType
             ->add("submit",SubmitType::class,[
                 'label' => "PRENOTA APPUNTAMENTO",
                 'attr' => [
-                    'class' => "cta_btn cta_btn_active",
+                    'class' => "cta_btn cta_btn_active lato-black",
                 ],
             ])
         ;

@@ -13,3 +13,16 @@
 .artist-slider-margin-top{
     margin-top: 58px;
 }
+
+$spacings: (
+    '0': -2.8px,
+    '1': 0.4px,
+    '2': 1.12px,
+    '3': 1.28px,
+);
+
+@each $key, $value in $spacings {
+    .letter-spacing-#{$key} {
+        letter-spacing: $value;
+    }
+}
