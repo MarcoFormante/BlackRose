@@ -35,13 +35,13 @@
 
         <div class="swiper-wrapper">
             <div class="swiper-slide">
-                <img src="/uploads/artists/{{artist.profileImage}}" alt="" >
+                <img src="/assets/uploads/artists/{{artist.profileImage}}" alt="" >
                 
             </div>
 
             {% for image in artist.images %}
                 <div class="swiper-slide">
-                    <img src="/uploads/artistImages/{{image.path}}" alt="">
+                    <img src="/assets/uploads/artistImages/{{image.path}}" alt="">
                 </div>
             {% endfor %}
         </div>
