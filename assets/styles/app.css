@@ -109,7 +109,7 @@ ul {
 .app_header {
   /* stylelint-disable-next-line at-rule-no-unknown */
 }
-@container sticky-header scroll-state(not(scrollable: top)) {
+@container sticky-header scroll-state(not (scrollable: top)) {
   .app_header {
     transform: translate(0, 0) !important;
   }
