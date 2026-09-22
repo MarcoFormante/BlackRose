@@ -8,6 +8,7 @@ html {
   max-width: 1920px;
   container-name: sticky-header;
   container-type: scroll-state;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -355,23 +356,23 @@ ul {
   margin-top: 126px;
 }
 
-#artists .slider {
+#tatuatori .slider {
   position: relative;
   margin-bottom: 80px;
 }
-#artists .swiper-slide {
+#tatuatori .swiper-slide {
   width: 397px;
   height: 560px;
   transition: all 0.3s;
 }
-#artists .swiper-slide-active, #artists .swiper-slide-prev {
+#tatuatori .swiper-slide-active, #tatuatori .swiper-slide-prev {
   opacity: 0.3;
 }
-#artists .slider-artist h3 {
+#tatuatori .slider-artist h3 {
   color: #e8eddf;
   font-size: 32px;
 }
-#artists .swiper-slide-artist {
+#tatuatori .swiper-slide-artist {
   width: 382px;
   height: 545px;
   position: absolute;
@@ -381,7 +382,7 @@ ul {
   margin-right: 16px;
   border-radius: 16px;
 }
-#artists .swiper-slide-artist-name {
+#tatuatori .swiper-slide-artist-name {
   color: #e8eddf;
   font-size: 80px;
   font-weight: 900;
@@ -391,12 +392,12 @@ ul {
      -moz-user-select: none;
           user-select: none;
 }
-#artists .swiper-slide-artist-info {
+#tatuatori .swiper-slide-artist-info {
   position: absolute;
   left: 18px;
   top: 18px;
 }
-#artists .swiper-slide-artist-socialmedias {
+#tatuatori .swiper-slide-artist-socialmedias {
   background-color: #e8eddf;
   display: flex;
   flex-direction: column;
@@ -408,18 +409,18 @@ ul {
   align-items: center;
   justify-content: space-evenly;
 }
-#artists .swiper-slide-artist-socialmedias svg path,
-#artists .swiper-slide-artist-socialmedias svg circle,
-#artists .swiper-slide-artist-socialmedias svg g {
+#tatuatori .swiper-slide-artist-socialmedias svg path,
+#tatuatori .swiper-slide-artist-socialmedias svg circle,
+#tatuatori .swiper-slide-artist-socialmedias svg g {
   transition: fill 0.3s, stroke 0.3s;
 }
-#artists .swiper-slide-artist-socialmedias svg:hover .fill-black {
+#tatuatori .swiper-slide-artist-socialmedias svg:hover .fill-black {
   fill: #242423;
 }
-#artists .swiper-slide-artist-socialmedias svg:hover .fill-white {
+#tatuatori .swiper-slide-artist-socialmedias svg:hover .fill-white {
   fill: #e8eddf;
 }
-#artists .swiper-slide-artist-socialmedias svg:hover .stroke-white {
+#tatuatori .swiper-slide-artist-socialmedias svg:hover .stroke-white {
   stroke: #e8eddf;
 }
 
