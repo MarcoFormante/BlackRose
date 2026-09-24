@@ -2,8 +2,6 @@
 
 namespace App\Service;
 
-use Composer\Pcre\Regex;
-use DateTime;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Mime\Email;
@@ -12,9 +10,13 @@ use Symfony\Component\Mailer\Transport\TransportInterface;
 
 class MailService
 {
+
     public function __construct(
-       private readonly TransportInterface $transport,
-    ) {}
+        private readonly TransportInterface $transport,
+        private string $emailFrom,
+        private string $emailTo
+    ) {
+    }
 
     public function sendMail(FormInterface $form): bool
     {
@@ -59,20 +61,20 @@ class MailService
 
         try {
             $email = (new Email())
-                ->from("Black Rose Tattoo Messina <test@resend.dev>")
-                ->to('formante.marco@gmail.com')
-                ->subject("Nuova richiesta dal sito BlackRoseTatto da parte di $name (" . date("d-m-Y-H-i-s") .")")
-                ->replyTo($userEmail)
-                ->text("Nuovo messaggio da parte di $name")
-                ->html($bodyHtml);
+            ->from($this->emailFrom)
+            ->to($this->emailTo)
+            ->subject("Nuova richiesta dal sito BlackRoseTatto da parte di $name (" . date("d-m-Y-H-i-s") .")")
+            ->replyTo($userEmail)
+            ->text("Nuovo messaggio da parte di $name")
+            ->html($bodyHtml);
 
-                if ($file) {
-                    $email->attachFromPath(
-                        $file->getPathname(),          
-                        $file->getClientOriginalName(), 
-                        $file->getClientMimeType() 
-                    );
-                }
+            if ($file) {
+                $email->attachFromPath(
+                    $file->getPathname(),          
+                    $file->getClientOriginalName(), 
+                    $file->getClientMimeType() 
+                );
+            }
 
             $this->transport->send($email);
             
