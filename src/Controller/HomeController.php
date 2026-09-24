@@ -6,6 +6,7 @@ use App\Form\ClientRequestType;
 use App\Repository\ArtistImageRepository;
 use App\Repository\ArtistRepository;
 use App\Repository\MixImageRepository;
+use App\Service\MailService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,7 +23,8 @@ final class HomeController extends AbstractController
         ArtistRepository $artistRepository, 
         TagAwareCacheInterface $artistCache, 
         TagAwareCacheInterface $mixCache,
-        ArtistImageRepository $artistImageRepository
+        ArtistImageRepository $artistImageRepository,
+        MailService $mailer
         ): Response
     {
         $form = $this->createForm(ClientRequestType::class);
@@ -31,17 +33,6 @@ final class HomeController extends AbstractController
 
         $response = new Response();
 
-        // Handle and process the client request form (!to finish!)
-        if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-            return $this->redirectToRoute("app_home"); 
-        }
-
-        //Handle form errors and add 422 status cose to response
-        if ($form->isSubmitted() && !$form->isValid()) {
-            $errors = $form->getErrors(deep: true, flatten: true);
-            $response->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY); 
-        }
 
         // Retrieve and cache the mixed image album (8600 seconds)
         $albumMix = $mixCache->get('mixAlbum',function (ItemInterface $item) use($mixImageRepository){
@@ -86,6 +77,25 @@ final class HomeController extends AbstractController
                 ];
             });
         }
+
+         // Handle and process the client request form (!to finish!)
+        if ($form->isSubmitted() && $form->isValid()) {
+            $sent = $mailer->sendMail($form);
+            if ($sent) {
+               $response->setStatusCode(Response::HTTP_OK);
+                return $this->render('home/index.html.twig', [
+                    'form' => $this->createForm(ClientRequestType::class),
+                    'success' => 'Messaggio inviato con successo!',
+                    'mixAlbum' => $albumMix,
+                    'artists' => $artists,
+                ],$response);
+            }
+        }
+
+        // Get form Errors
+        $errors = $form->getErrors(deep: true, flatten: true);
+        // Add status code for Turbo / invalid Form or errors 
+        $response->setStatusCode($form->isSubmitted() ? Response::HTTP_UNPROCESSABLE_ENTITY : Response::HTTP_OK);
 
         // Render the template with form, errors, and cached data
         return $this->render('home/index.html.twig', [
