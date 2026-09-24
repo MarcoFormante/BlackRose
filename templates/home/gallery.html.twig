@@ -17,7 +17,7 @@
         <div class="swiper-wrapper">
             {% set halfLength = ((mixAlbum|length )  / 2)|round(0,'ceil') %}
             {% for image in mixAlbum|slice(0, halfLength ) %}
-                <div class="swiper-slide">
+                <div class="swiper-slide" data-index="{{loop.index0}}">
                    <img
                        loading="lazy"
                        src="/assets/uploads/mixAlbum/{{image}}"
@@ -25,6 +25,7 @@
                    />
                 </div>
             {% endfor %}
+           
         </div>          
     </div>
 
@@ -32,7 +33,7 @@
     <div class="swiper-mix slider-bottom" data-swiper-target="secondSlider">
         <div class="swiper-wrapper">
             {% for image in mixAlbum|slice(halfLength) %}
-                <div class="swiper-slide">
+                <div class="swiper-slide" data-index="{{loop.index0 + halfLength}}">
                    <img
                        loading="lazy"
                        src="/assets//uploads/mixAlbum/{{image}}"
@@ -43,6 +44,7 @@
               {% if mixAlbum|length is not divisible by(2) %}
              <div class="swiper-slide"></div>
             {% endif %}
+            
         </div>
     </div>
 </section>
