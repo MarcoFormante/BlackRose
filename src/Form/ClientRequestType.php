@@ -37,15 +37,13 @@ class ClientRequestType extends AbstractType
 
             ->add('day', DateType::class, [
                 'label' => "Scegli il giorno",
+                'required' => false,
                 'attr' => [
                     'class' => "picker lato-regular",
                 ],
                 'label_attr' => [
                     'class' => 'input-label-absolute hidden-label'
                 ],
-                'constraints' => [
-                    new Assert\NotBlank(message:"La data è obbligatoria"),
-                ]
             ])
 
             ->add('email', EmailType::class, [
@@ -61,6 +59,7 @@ class ClientRequestType extends AbstractType
 
              ->add('time', TimeType::class, [
                 'label' => "Scegli l'orario",
+                'required' => false,
                 'attr' => [
                     'class' => "time-picker lato-regular",
                     'data-time' => "Scegli l'orario"
@@ -95,7 +94,7 @@ class ClientRequestType extends AbstractType
                 ],
                 'constraints' => [
                     new Assert\File(
-                        maxSize:'1M',
+                        maxSize:'8M',
                         mimeTypes:[
                             'image/jpeg',
                             'image/png',
@@ -111,6 +110,7 @@ class ClientRequestType extends AbstractType
                 'label' => "PRENOTA APPUNTAMENTO",
                 'attr' => [
                     'class' => "cta_btn cta_btn_active lato-black",
+                    'data-form-target' => 'submit'
                 ],
             ])
         ;
