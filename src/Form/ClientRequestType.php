@@ -87,10 +87,23 @@ class ClientRequestType extends AbstractType
                 'required' => false,
                 'attr' => [
                     'placeholder' => "Allega un' immagine",
-                    'class' => 'lato-regular'
+                    'class' => 'lato-regular',
+                    'accept' => 'image/jpeg, image/png, image/webp, image/svg'
                 ],
                 'label_attr' => [
                     'class' => 'input-label-absolute hidden-label'
+                ],
+                'constraints' => [
+                    new Assert\File(
+                        maxSize:'1M',
+                        mimeTypes:[
+                            'image/jpeg',
+                            'image/png',
+                            'image/webp',
+                            'image/svg'
+                        ],
+                        mimeTypesMessage:'Per favore carica un formato valido (JPEG, PNG, WEBP, SVG)',
+                    )
                 ]
             ])
 
@@ -106,7 +119,6 @@ class ClientRequestType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            // Configure your form options here
         ]);
     }
 }
