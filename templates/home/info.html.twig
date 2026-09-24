@@ -2,7 +2,7 @@
     <div class="default_padding_x">
         <twig:sectionheading title="INFO E CONTATTI" subTitle="Contattaci" />
     </div>
-
+   <turbo-frame id="message_form_frame">
     <div class="info-container default_padding_left" data-controller="form">
         <div>
             <h3 class="lato-black">PRENOTA UN APPUNTAMENTO</h3>
@@ -11,16 +11,13 @@
                 anche immagini e lasciare un messaggio. Ti ricontatteremo il
                 prima possibile
             </P>
-
-            <turbo-frame id="message_form_frame">
-
-                {% if not form.vars.valid %}
-                    <div class="alert alert-danger lato-regular">
-                        {{ form_errors(form, {'allow_each_field': true}) }}
-                    </div>
-                {% endif %}
-
-                {{ form_start(form) }}
+              
+                {{ form_start(form,{'attr':{'data-form-target':'form'}}) }}
+                    {% if success is defined %}
+                        <div class="alert alert-success">
+                            <p>{{success}}</p>
+                        </div>
+                    {% endif %}
                     <div
                         class="form-input-container-relative form-input-container-small-input lato-regular"
                     >
@@ -76,7 +73,7 @@
                         {{ form_label(form.submit) }}
                         {{ form_widget(form.submit) }}
                     </div>
-                    {% if errors %}
+                    {% if errors is defined %}
                         <div class="form-errors lato-regular">
                             {% for error in errors %}
                                 <p>{{error.message}}</p>
