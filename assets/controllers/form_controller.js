@@ -7,7 +7,7 @@ import { Controller } from '@hotwired/stimulus';
 
 /* stimulusFetch: 'lazy' */
 export default class extends Controller {
-    static targets = ['datePicker', 'timePicker', 'fileInput', 'fileImage']
+    static targets = ['datePicker', 'timePicker', 'fileInput', 'fileImage','form','submit']
 
     initialize() {
       this.onFocus = this.onFocus.bind(this)
@@ -16,9 +16,11 @@ export default class extends Controller {
       this.onTimeChange = this.onTimeChange.bind(this)
       this.onTimeInput = this.onTimeInput.bind(this)
       this.onFileChange = this.onFileChange.bind(this)
+      this.onSubmit = this.onSubmit.bind(this)
     }
 
     connect() {
+       
         if (this.hasDatePickerTarget) {
                 this.datePickerTarget.addEventListener("click",this.onFocus);
                 this.datePickerTarget.addEventListener("blur",this.onBlur);
@@ -33,6 +35,8 @@ export default class extends Controller {
         if (this.hasFileInputTarget) {
             this.fileInputTarget.addEventListener("change",this.onFileChange);
         }
+
+        this.formTarget.addEventListener('submit',this.onSubmit)
     }
 
     disconnect() {
@@ -108,4 +112,11 @@ export default class extends Controller {
             this.fileImageTarget.src = "";
         }
     };
+
+    onSubmit(){
+        this.submitTarget.innerHTML = "INVIANDO..."
+        this.submitTarget.classList.add("pulse")
+        this.formTarget.classList.add("form-disabled")
+        this.submitTarget.disabled = true
+    }
 }
