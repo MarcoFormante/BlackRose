@@ -545,6 +545,13 @@ ul {
   margin-top: 64px;
   margin-bottom: 50px;
 }
+#info .form-errors p {
+  color: rgb(201, 24, 62);
+}
+#info .form-disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}
 #info .file-image {
   position: absolute;
   top: 53%;
@@ -716,14 +723,13 @@ ul {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
-  text-indent: 24px;
   appearance: none;
   border: none;
   border-radius: 4px;
   letter-spacing: 1.12px;
   color: #818784;
   background-color: #333533;
-  padding-top: 16px;
+  padding: 16px;
 }
 #info .form-input-container-big-input textarea:focus {
   outline: 1px solid #fff;
@@ -734,6 +740,9 @@ ul {
   justify-content: center;
   cursor: pointer;
 }
+#info .pulse {
+  animation: pulse 1s infinite alternate;
+}
 #info address ul {
   height: inherit;
   display: flex;
@@ -741,7 +750,8 @@ ul {
   margin-top: 80px;
   gap: 50px;
 }
-#info address ul li, #info address ul a {
+#info address ul li,
+#info address ul a {
   color: #818784;
   font-size: 20px;
   font-style: normal;
@@ -770,9 +780,6 @@ ul {
 }
 #info address ul li.insta-icon::before {
   background: url(../images/icon_footer_IG.svg) no-repeat;
-}
-#info .form-errors p {
-  color: rgb(201, 24, 62);
 }
 #info #info-studio .flex-container {
   display: flex;
@@ -845,6 +852,14 @@ ul {
   background: url("../images/icon_footer_fb.svg") no-repeat;
 }
 
+@keyframes pulse {
+  from {
+    opacity: 0.2;
+  }
+  to {
+    opacity: 1;
+  }
+}
 .lato-thin {
   font-family: "Lato", sans-serif;
   font-weight: 100;
@@ -984,5 +999,41 @@ ul {
   }
   to {
     opacity: 1;
+  }
+}
+.alert {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: "Lato";
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  z-index: 150;
+  opacity: 0;
+  animation: showAlert 3s cubic-bezier(0.215, 0.61, 0.355, 1);
+  padding: 16px;
+  border-top: none;
+  transform: translateY(-100%);
+}
+.alert-success {
+  border: 2px solid rgb(58, 229, 58);
+  background: rgb(1, 29, 1);
+}
+.alert-error {
+  border: 2px solid rgb(215, 63, 81);
+  background: rgb(47, 1, 6);
+}
+
+@keyframes showAlert {
+  0%, 100% {
+    opacity: 0;
+  }
+  20%, 80% {
+    opacity: 1;
+    transform: translateY(0%);
   }
 }/*# sourceMappingURL=app.css.map */
