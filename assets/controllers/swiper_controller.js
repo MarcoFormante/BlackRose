@@ -7,9 +7,10 @@ export default class extends Controller {
     // Define target elements for main and secondary Swiper instances
     static targets = ['slider','secondSlider']
 
-    /**
-     * Initializes Swiper instances and configures dual-slider synchronization upon DOM connection.
-     */
+    initialize(){
+        this.showLightBox = this.showLightBox.bind(this)
+    }
+
     connect() {
         if (!this.hasSliderTarget) return
         // Initialize the primary Swiper carousel
@@ -22,8 +23,9 @@ export default class extends Controller {
             },
             lazy:{
                 enable:true
-            }
+            },
         });
+            this.swiper.on('click', this.showLightBox);
 
         // Initialize the secondary Swiper carousel if present and synchronize controls bidirectionally
         if (this.hasSecondSliderTarget) {
@@ -37,9 +39,9 @@ export default class extends Controller {
         // Bind slider instances together so scrolling one updates the other
             this.swiper.controller.control = this.swiperBottom;
             this.swiperBottom.controller.control = this.swiper;
+            this.swiperBottom.on('click', this.showLightBox)
         }
-    }   
-   
+    }
     /**
      * Destroys Swiper instances to prevent memory leaks when the controller is disconnected from the DOM.
      */
@@ -50,5 +52,44 @@ export default class extends Controller {
        if (this.swiperBottom) {
              this.swiperBottom.destroy(true,true)
        }
+    }
+
+
+    showLightBox(sw){
+                const container = document.querySelector(".swiper-wrapper-lightBox")
+                if (!container.innerHTML) {
+                    
+                    const index = sw.clickedSlide.dataset.index
+                    const lightBox = document.querySelector(".swiper-lightBox");
+                    const slides = sw.slides
+
+                    slides.forEach(slide => {
+                        const image = document.createElement("img")
+                        image.src = slide.querySelector("img").src
+                        const swiperSlide = document.createElement("div")
+                        swiperSlide.classList.add("swiper-slide")
+                        swiperSlide.classList.add("swiper-slide-lightBox")
+                        swiperSlide.appendChild(image)
+                        container.appendChild(swiperSlide)
+                    });
+                    if (this.hasSecondSliderTarget) {
+
+                        const bottomSlides = this.swiperBottom.slides
+
+                        bottomSlides.forEach(slide => {
+                            const image = document.createElement("img")
+                            image.src = slide.querySelector("img").src
+                            const swiperSlide = document.createElement("div")
+                            swiperSlide.classList.add("swiper-slide")
+                            swiperSlide.classList.add("swiper-slide-lightBox")
+                            swiperSlide.appendChild(image)
+                            container.appendChild(swiperSlide)
+                        });
+                    }
+                    
+                    lightBox.classList.add("swiper-lightBox-active")
+                    lightBox.dataset.clickedSlide = index
+                    document.querySelector("#lightbox").setAttribute("data-controller","lightbox")
+            }
     }
 }
