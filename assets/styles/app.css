@@ -274,7 +274,7 @@ ul {
 .swiper-slide:active {
   cursor: grabbing;
 }
-.swiper-slide::after {
+.swiper-slide:not(.swiper-slide-lightBox)::after {
   position: absolute;
   content: "";
   width: 100%;
@@ -771,6 +771,9 @@ ul {
 #info address ul li.insta-icon::before {
   background: url(../images/icon_footer_IG.svg) no-repeat;
 }
+#info .form-errors p {
+  color: rgb(201, 24, 62);
+}
 #info #info-studio .flex-container {
   display: flex;
   flex-direction: column;
@@ -900,4 +903,86 @@ ul {
   font-family: "Lato", sans-serif;
   font-weight: 900;
   font-style: italic;
+}
+
+.swiper-lightBox {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.6s ease, display 0.6s ease allow-discrete;
+  background-color: black;
+}
+
+.swiper-lightBox-active {
+  display: block;
+  opacity: 1;
+}
+
+@starting-style {
+  .swiper-lightBox-active {
+    opacity: 0;
+  }
+}
+.swiper-wrapper-lightBox {
+  width: inherit;
+  height: inherit;
+}
+
+.swiper-slide-lightBox {
+  width: inherit;
+  height: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: grab;
+}
+.swiper-slide-lightBox:hover::after {
+  background: transparent;
+}
+.swiper-slide-lightBox img {
+  max-width: 600px;
+  max-height: 150vw;
+}
+
+.swiper-button-lightBox {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 3px solid white;
+  position: absolute;
+}
+.swiper-button-lightBox svg {
+  width: 30%;
+  fill: white;
+}
+.swiper-button-lightBox svg path {
+  fill: white;
+}
+
+.lightBox-exit-button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background: transparent;
+  border: none;
+  z-index: 110;
+  cursor: pointer;
+}
+
+@keyframes show-lightBox {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }/*# sourceMappingURL=app.css.map */
