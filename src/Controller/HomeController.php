@@ -16,21 +16,31 @@ use Symfony\Contracts\Cache\TagAwareCacheInterface;
 final class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
-    public function index(Request $request,MixImageRepository $mixImageRepository,ArtistRepository $artistRepository, TagAwareCacheInterface  $artistCache, TagAwareCacheInterface $mixCache,ArtistImageRepository $artistImageRepository): Response
+    public function index(
+        Request $request,
+        MixImageRepository $mixImageRepository,
+        ArtistRepository $artistRepository, 
+        TagAwareCacheInterface $artistCache, 
+        TagAwareCacheInterface $mixCache,
+        ArtistImageRepository $artistImageRepository
+        ): Response
     {
         $form = $this->createForm(ClientRequestType::class);
         $form->handleRequest($request);
         $errors = [];
 
-        // Collect form validation errors if present
-        if ($errorData = $form->getErrors(deep:true,flatten:true)) {
-            $errors = $errorData;
-        }
+        $response = new Response();
 
         // Handle and process the client request form (!to finish!)
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             return $this->redirectToRoute("app_home"); 
+        }
+
+        //Handle form errors and add 422 status cose to response
+        if ($form->isSubmitted() && !$form->isValid()) {
+            $errors = $form->getErrors(deep: true, flatten: true);
+            $response->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY); 
         }
 
         // Retrieve and cache the mixed image album (8600 seconds)
@@ -83,6 +93,6 @@ final class HomeController extends AbstractController
             'errors' => $errors,
             'mixAlbum' => $albumMix,
             'artists' =>$artists
-        ]);
+        ],$response);
     }
 }
