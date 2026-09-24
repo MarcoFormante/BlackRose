@@ -140,7 +140,7 @@
         cursor: grabbing;
     }
 
-    &::after {
+    &:not(.swiper-slide-lightBox)::after {
         position: absolute;
         content: "";
         width: 100%;
