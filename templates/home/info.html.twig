@@ -11,64 +11,81 @@
                 anche immagini e lasciare un messaggio. Ti ricontatteremo il
                 prima possibile
             </P>
-            {{ form_start(form) }}
-            <div
-                class="form-input-container-relative form-input-container-small-input lato-regular"
-            >
-                {{ form_label(form.name) }}
-                {{ form_widget(form.name) }}
-            </div>
-            <div
-                class="form-input-container-relative form-input-container-small-input"
-            >
-                {{ form_label(form.day) }}
-                {{ form_widget(form.day,{'attr':{'data-form-target':'datePicker'}}) }}
-            </div>
-            <div
-                class="form-input-container-relative form-input-container-small-input"
-            >
-                {{ form_label(form.email) }}
-                {{ form_widget(form.email) }}
-            </div>
 
-            <div
-                class="form-input-container-relative form-input-container-small-input"
-            >
-                {{ form_label(form.time) }}
-                {{ form_widget(form.time,{'attr':{'data-form-target':'timePicker'}}) }}
-            </div>
-            <div
-                class="form-input-container-relative form-input-container-big-input"
-            >
-                {{ form_label(form.message) }}
-                {{ form_widget(form.message) }}
-            </div>
-            <div
-                class="form-input-container-relative form-input-container-small-input overflow-hidden file-container"
-            >
-                <div class="file-image">
-                    <img
-                        aria-hidden="true"
-                        src="{{ asset('images/upload-image_icon.svg') }}"
-                        width="30"
-                        height="40"
-                        alt=""
-                        data-form-target="fileImage"
-                    />
-                </div>
-                
-                {{ form_label(form.file) }}
-                {{ form_widget(form.file,{'attr':{'data-form-target':'fileInput'}})}}
-            </div>
+            <turbo-frame id="message_form_frame">
 
-            <div
-                class="form-input-container-relative form-input-container-small-input overflow-hidden bgColor_transparent"
-            >
-                {{ form_label(form.submit) }}
-                {{ form_widget(form.submit) }}
-            </div>
+                {% if not form.vars.valid %}
+                    <div class="alert alert-danger lato-regular">
+                        {{ form_errors(form, {'allow_each_field': true}) }}
+                    </div>
+                {% endif %}
 
-            {{ form_end(form) }}
+                {{ form_start(form) }}
+                    <div
+                        class="form-input-container-relative form-input-container-small-input lato-regular"
+                    >
+                        {{ form_label(form.name) }}
+                        {{ form_widget(form.name) }}
+                    </div>
+                    <div
+                        class="form-input-container-relative form-input-container-small-input"
+                    >
+                        {{ form_label(form.day) }}
+                        {{ form_widget(form.day,{'attr':{'data-form-target':'datePicker'}}) }}
+                    </div>
+                    <div
+                        class="form-input-container-relative form-input-container-small-input"
+                    >
+                        {{ form_label(form.email) }}
+                        {{ form_widget(form.email) }}
+                    </div>
+
+                    <div
+                        class="form-input-container-relative form-input-container-small-input"
+                    >
+                        {{ form_label(form.time) }}
+                        {{ form_widget(form.time,{'attr':{'data-form-target':'timePicker'}}) }}
+                    </div>
+                    <div
+                        class="form-input-container-relative form-input-container-big-input"
+                    >
+                        {{ form_label(form.message) }}
+                        {{ form_widget(form.message) }}
+                    </div>
+                    <div
+                        class="form-input-container-relative form-input-container-small-input overflow-hidden file-container"
+                    >
+                        <div class="file-image">
+                            <img
+                                aria-hidden="true"
+                                src="{{ asset('images/upload-image_icon.svg') }}"
+                                width="30"
+                                height="40"
+                                alt=""
+                                data-form-target="fileImage"
+                            />
+                        </div>
+                        
+                        {{ form_label(form.file) }}
+                        {{ form_widget(form.file,{'attr':{'data-form-target':'fileInput'}})}}
+                    </div>
+
+                    <div
+                        class="form-input-container-relative form-input-container-small-input overflow-hidden bgColor_transparent"
+                    >
+                        {{ form_label(form.submit) }}
+                        {{ form_widget(form.submit) }}
+                    </div>
+                    {% if errors %}
+                        <div class="form-errors lato-regular">
+                            {% for error in errors %}
+                                <p>{{error.message}}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    
+                {{ form_end(form) }}
+            </turbo-frame>
         </div>
 
 <div class="address-info">
@@ -148,7 +165,7 @@
                 <span itemprop="openingHours" content="Sa 10:00-17:30" class="lato-regular">
                     <b>SAB:</b> <time datetime="10:00">10:00</time> - <time datetime="18:00">18:00</time>
                 </span><br />
-                <span><b>DOM:</b> Chiuso</span>
+                <span class="lato-regular"><b>DOM:</b> Chiuso</span>
             </p>
         </div>
         <div>
