@@ -245,6 +245,10 @@ ul {
   position: relative;
 }
 
+.swiper-slide-off {
+  pointer-events: none;
+}
+
 .swiper-wrapper:active {
   cursor: grabbing;
 }
