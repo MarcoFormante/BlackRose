@@ -13,7 +13,7 @@ if (imageIconContainer) {
     imageIconContainer.removeChild(icon)
     // Create a new image element pointing to the uploaded artist image path
     const newImage = new Image()
-    newImage.src = "/uploads/artists/" + fileName.textContent
+    newImage.src = "/assets/uploads/artists/" + fileName.textContent
     newImage.classList.add("artist-image")
     // Insert the actual image preview at the top of the container
     imageIconContainer.prepend(newImage)
