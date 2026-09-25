@@ -39,12 +39,13 @@ class ArtistCrudController extends AbstractCrudController
      */
     public function configureFields(string $pageName): iterable
     {
-        $imagesFolder = $this->getParameter('uploads_folder') . "artists";
+        $albumName = "artists";
+        $imagesFolder = $this->getParameter('uploads_folder') . $albumName;
         return [
             TextField::new('name',"Nome"),
             TextField::new('nameSyllables',"Sillabe (separate con virgole)"),
             ImageField::new('image',"Foto Artista")
-                ->setBasePath('/uploads/artists/')
+                ->setBasePath('/assets/uploads/' . $albumName)
                 ->setUploadDir($imagesFolder)
                 ->setUploadedFileNamePattern('[randomhash].[extension]')
                 ->maxSize('5M',"L'immagine deve essere massimo 5MB")

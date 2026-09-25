@@ -37,14 +37,15 @@ class ArtistImageCrudController extends AbstractCrudController
      */
     public function configureFields(string $pageName): iterable
     {
-        $imagesFolder = $this->getParameter('uploads_folder') . "artistImages";
+        $albumName = "artistImages";
+        $imagesFolder = $this->getParameter('uploads_folder') . $albumName;
         return [
             IdField::new('id')->hideOnForm()->hideOnIndex(),
             AssociationField::new('Artist',"Artista"),
 
             // Field for multiple image upload on creation forms
             ImageField::new('files',"Immagine")
-                ->setBasePath('/uploads/artistImages/')
+                ->setBasePath('/assets/uploads/' . $albumName)
                 ->setUploadDir($imagesFolder)
                 ->maxSize('5M',"L'immagine deve essere massimo 5MB")
                 ->mimeTypes("image/png,image/jpeg,image/webp,image/jpg")
@@ -65,7 +66,7 @@ class ArtistImageCrudController extends AbstractCrudController
 
 
             ImageField::new('path',"Immagine")
-                ->setBasePath("/uploads/artistImages")
+                ->setBasePath('/assets/uploads/' . $albumName)
                 ->setUploadDir($imagesFolder)
                 ->maxSize('5M',"L'immagine deve essere massimo 5MB")
                 ->mimeTypes("image/png,image/jpeg,image/webp,image/jpg")

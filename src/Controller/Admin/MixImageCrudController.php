@@ -36,11 +36,12 @@ class MixImageCrudController extends AbstractCrudController
      */
     public function configureFields(string $pageName): iterable
     {
-        $imagesFolder = $this->getParameter('uploads_folder') . "mixAlbum";
+        $albumName = "mixAlbum";
+        $imagesFolder =  $this->getParameter('uploads_folder') . $albumName;
         return [
             // Field for uploading multiple images at once in creation forms
            ImageField::new("files","Aggiungi")
-                ->setBasePath('/uploads/mixAlbum')
+                ->setBasePath("/assets/uploads/" . $albumName)
                 ->setUploadDir($imagesFolder)
                 ->setUploadedFileNamePattern('[randomhash].[extension]')
                 ->maxSize('5M',"L'immagine deve essere massimo 5MB")
@@ -60,7 +61,7 @@ class MixImageCrudController extends AbstractCrudController
                 ]),
             
             ImageField::new("path","Aggiungi immagini")
-                ->setBasePath('/uploads/mixAlbum')
+                ->setBasePath("/assets/uploads/" . $albumName)
                 ->setUploadDir($imagesFolder)
                 ->setUploadedFileNamePattern('[randomhash].[extension]')
                 ->maxSize('5M',"L'immagine deve essere massimo 5MB")
