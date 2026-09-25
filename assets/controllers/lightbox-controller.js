@@ -16,18 +16,19 @@ export default class extends Controller {
         }
         
         this.swiper = new Swiper(this.lightboxTarget, {
-                    slidesPerView: 1,
-                    spaceBetween: 16,
-                    navigation:{
-                        nextEl: '.swiper-button-next-lightbox',
-                        prevEl: '.swiper-button-prev-lightbox',
-                    },
-                    lazy:{
-                        enable:true
-                    },
-                });
+                        slidesPerView: 1,
+                        spaceBetween: 16,
+                        navigation:{
+                            nextEl: '.swiper-button-next-lightbox',
+                            prevEl: '.swiper-button-prev-lightbox',
+                        },
+                        lazy:{
+                            enable:true
+                        },
+                    });
 
             this.swiper.slideTo(this.lightboxTarget.dataset.clickedSlide,0)
+
             if (this.hasExitTarget) {
                 this.exitTarget.addEventListener("click",this.closeLightBox)
             }
@@ -38,7 +39,9 @@ export default class extends Controller {
         if (this.swiper) {
             this.swiper.destroy(true,true)
         }
-        this.exitTarget.removeEventListener("click", this.closeLightBox)
+        if (this.hasExitTarget) {
+            this.exitTarget.removeEventListener("click", this.closeLightBox)
+        }
     }
 
     closeLightBox(){
@@ -49,5 +52,4 @@ export default class extends Controller {
         this.lightboxTarget.classList.remove("swiper-lightBox-active")
         this.element.removeAttribute("data-controller")
     }
-
 }
