@@ -56,14 +56,16 @@ export default class extends Controller {
 
 
     showLightBox(sw){
-                const container = document.querySelector(".swiper-wrapper-lightBox")
-                if (!container.innerHTML) {
-                    
-                    const index = sw.clickedSlide.dataset.index
-                    const lightBox = document.querySelector(".swiper-lightBox");
-                    const slides = sw.slides
-
-                    slides.forEach(slide => {
+            if (!sw.clickedSlide) {
+                return
+            }
+            const container = document.querySelector(".swiper-wrapper-lightBox")
+            if (!container.innerHTML) {
+                const index = sw.clickedSlide.dataset.index
+                const lightBox = document.querySelector(".swiper-lightBox");
+                const slides = sw.slides
+                slides.forEach(slide => {
+                    if(slide.hasChildNodes()){
                         const image = document.createElement("img")
                         image.src = slide.querySelector("img").src
                         const swiperSlide = document.createElement("div")
@@ -71,12 +73,12 @@ export default class extends Controller {
                         swiperSlide.classList.add("swiper-slide-lightBox")
                         swiperSlide.appendChild(image)
                         container.appendChild(swiperSlide)
-                    });
-                    if (this.hasSecondSliderTarget) {
-
-                        const bottomSlides = this.swiperBottom.slides
-
-                        bottomSlides.forEach(slide => {
+                    }
+                });
+                if (this.hasSecondSliderTarget) {
+                    const bottomSlides = this.swiperBottom.slides
+                    bottomSlides.forEach(slide => {
+                        if(slide.hasChildNodes()){
                             const image = document.createElement("img")
                             image.src = slide.querySelector("img").src
                             const swiperSlide = document.createElement("div")
@@ -84,12 +86,13 @@ export default class extends Controller {
                             swiperSlide.classList.add("swiper-slide-lightBox")
                             swiperSlide.appendChild(image)
                             container.appendChild(swiperSlide)
-                        });
-                    }
-                    
-                    lightBox.classList.add("swiper-lightBox-active")
-                    lightBox.dataset.clickedSlide = index
-                    document.querySelector("#lightbox").setAttribute("data-controller","lightbox")
-            }
+                        } 
+                    });
+                }
+                
+                lightBox.classList.add("swiper-lightBox-active")
+                lightBox.dataset.clickedSlide = index
+                document.querySelector("#lightbox").setAttribute("data-controller","lightbox")
+        }
     }
 }
