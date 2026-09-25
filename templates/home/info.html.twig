@@ -76,14 +76,15 @@
                     {% if errors is defined %}
                         <div class="form-errors lato-regular">
                             {% for error in errors %}
-                                <p>{{error.message}}</p>
+                                <p>{{error}}</p>
                             {% endfor %}
                         </div>
                     {% endif %}
                     
                 {{ form_end(form) }}
-            </turbo-frame>
+            
         </div>
+        </turbo-frame>
 
 <div class="address-info">
     <h3 class="lato-black">INFORMAZIONI UTILI</h3>
