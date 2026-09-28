@@ -19,38 +19,38 @@
                         </div>
                     {% endif %}
                     <div
-                        class="form-input-container-relative form-input-container-small-input lato-regular"
+                        class="form-input-container-relative form-input-container-small-input lato-regular form-order-mobile-1"
                     >
                         {{ form_label(form.name) }}
                         {{ form_widget(form.name) }}
                     </div>
                     <div
-                        class="form-input-container-relative form-input-container-small-input"
+                        class="form-input-container-relative form-input-container-small-input form-order-mobile-3"
                     >
                         {{ form_label(form.day) }}
                         {{ form_widget(form.day,{'attr':{'data-form-target':'datePicker'}}) }}
                     </div>
                     <div
-                        class="form-input-container-relative form-input-container-small-input"
+                        class="form-input-container-relative form-input-container-small-input form-order-mobile-2"
                     >
                         {{ form_label(form.email) }}
                         {{ form_widget(form.email) }}
                     </div>
 
                     <div
-                        class="form-input-container-relative form-input-container-small-input"
+                        class="form-input-container-relative form-input-container-small-input form-order-mobile-4"
                     >
                         {{ form_label(form.time) }}
                         {{ form_widget(form.time,{'attr':{'data-form-target':'timePicker'}}) }}
                     </div>
                     <div
-                        class="form-input-container-relative form-input-container-big-input"
+                        class="form-input-container-relative form-input-container-big-input form-order-mobile-5"
                     >
                         {{ form_label(form.message) }}
                         {{ form_widget(form.message) }}
                     </div>
                     <div
-                        class="form-input-container-relative form-input-container-small-input overflow-hidden file-container"
+                        class="form-input-container-relative form-input-container-small-input overflow-hidden file-container form-order-mobile-6"
                     >
                         <div class="file-image">
                             <img
@@ -60,6 +60,7 @@
                                 height="40"
                                 alt=""
                                 data-form-target="fileImage"
+                                loading="lazy"
                             />
                         </div>
                         
@@ -68,16 +69,18 @@
                     </div>
 
                     <div
-                        class="form-input-container-relative form-input-container-small-input overflow-hidden bgColor_transparent"
+                        class="form-input-container-relative form-input-container-small-input overflow-hidden bgColor_transparent form-order-mobile-7"
                     >
                         {{ form_label(form.submit) }}
                         {{ form_widget(form.submit) }}
                     </div>
-                    {% if errors is defined %}
-                        <div class="form-errors lato-regular">
-                            {% for error in errors %}
-                                <p>{{error}}</p>
-                            {% endfor %}
+                    {% if errors is defined and errors|length %}
+                        <div class="alert alert-error">
+                             <div class="form-errors lato-regular">
+                                {% for error in errors %}
+                                    <p>{{error}}</p>
+                                {% endfor %}
+                            </div>
                         </div>
                     {% endif %}
                     
@@ -130,7 +133,6 @@
                     target="_blank"
                     rel="noopener noreferrer"
                     class="text-info-item text-info-item-link item-whatsapp-link"
-                    title="Contattaci su WhatsApp"
                 >
                     Contattaci su WhatsApp
                 </a>
@@ -157,10 +159,10 @@
         <div class="info-container-item info-item-container">
             <div aria-hidden="true" class="time-icon"></div>
             <p class="text-info-item text-info-item-openTime">
-                <span itemprop="openingHours" content="Mo-Fr 10:00-17:30" class="lato-regular">
+                <span itemprop="openingHours" content="Mo-Fr 10:00-18:00" class="lato-regular">
                     <b>LUN-VEN:</b> <time datetime="10:00">10:00</time> - <time datetime="18:00">18:00</time>
                 </span><br />
-                <span itemprop="openingHours" content="Sa 10:00-17:30" class="lato-regular">
+                <span itemprop="openingHours" content="Sa 10:00-18:00" class="lato-regular">
                     <b>SAB:</b> <time datetime="10:00">10:00</time> - <time datetime="18:00">18:00</time>
                 </span><br />
                 <span class="lato-regular"><b>DOM:</b> Chiuso</span>
