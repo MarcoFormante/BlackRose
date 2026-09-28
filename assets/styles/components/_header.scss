@@ -16,8 +16,11 @@
     transition: transform 0.3s;
     transform: translate(0, 0);
 
+    @media (max-width:768px){
+        height: 110px;
+    }
     @container sticky-header scroll-state(scrolled: bottom) {
-        transform: translate(0, -100%);
+        transform: translate(0, -150%);
     }
 
    /* stylelint-disable-next-line at-rule-no-unknown */
@@ -30,6 +33,11 @@
     img{
         width: 120px;
         height: 70px;
+
+        @media (max-width:1024px){
+            width: 100px;
+            height: 60px;
+        }
     }
 
     &_nav, &_nav_list{
@@ -39,12 +47,41 @@
 
     &_nav{
         gap: 50px;
+
+        @media (max-width:1024px){
+            gap: 15px;
+        }
+
     }
 
     &_nav_list{
+       
         gap: 30px;
 
+        @media (max-width:850px){
+            gap: 15px;
+        }
+
+        @media (max-width:768px){
+            position: absolute;
+            bottom: -30px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-evenly;
+            background-color: $black_default;
+            height: 50px;
+            gap: 0;
+        }
+
+        @media (max-width:400px){
+            justify-content: center;
+            width: 100%;
+        }
+
+
         a{
+            
             text-decoration: none;
             color: $secondary_color;
             border-radius: 16px;
@@ -53,9 +90,31 @@
             padding: 6px 16px;
             letter-spacing: 1.28px;
             transition: border-color $defaultTransition;
+            font-size: clamp(12px, .9vw, 16px);
+
+            @media (max-width:1024px){
+                 padding: 10px 5px;
+            }
+
+            @media (max-width:768px){
+                background:#333533;
+                font-size: 10px;
+                display: block;
+                text-align: center;
+                width: 82px;
+            }
 
             &:hover{
                 border-color: $grey;
+            }
+        }
+
+        a[href="#info"]::after{
+            content: 'E CONTATTI';
+            margin-left:5px;
+
+            @media (max-width:768px){
+              display: none;
             }
         }
     }
@@ -64,5 +123,11 @@
         gap: 10px;
         border-color: $primary_color;
         padding: 8px 32px;
+
+        @media (max-width:1024px){
+            padding:  7px 16px;
+            font-size: 12px;
+        }
+       
     }
 }

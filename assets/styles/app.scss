@@ -6,6 +6,105 @@
 @use "./components/lightbox";
 @use "./components/alert";
 @use "./login";
+@use "./privacy";
 
 
 
+@media (width <= 1570px) {
+    .default_padding_x{
+        padding-inline: 30px;
+    }
+
+    .default_padding_left{
+        padding-left: 30px;
+    }   
+
+    .swiper-navigation-container{
+        padding-right: 30px;
+    }
+}
+
+
+@media (width <= 768px) {
+    .default_padding_x{
+        padding-inline: 10px;
+    }
+
+    .default_padding_left{
+        padding-left: 10px;
+    }   
+
+    .swiper-navigation-container{
+        padding-right: 10px;
+    }
+}
+
+
+
+
+#studio{
+    .studio-images-container{
+        display: grid;
+        gap: 16px 17px;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(6, clamp(120px,18vw,300px));
+
+        @media (max-width:768px) {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .studio-images-item{
+            @media (max-width:768px) {
+                max-height: fit-content ;
+                max-width: 340px;
+            }
+           
+        }
+
+        .studio-text-card-container{
+            @media (max-width:768px) {
+                width: 100%;
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 50px;
+            }
+        }
+    }   
+}
+ 
+
+#studio .studio-images .studio-text-card-container .cta_btn{
+        @media (max-width:1350px){
+            margin-top: 40px;
+            width:210px;
+            height: 38px;
+            font-size: 10px;
+        }
+}
+
+#studio .studio-images .studio-text-card-container .studio-images-item-text{
+    font-size: clamp(16px, 1.7vw, 40px);
+
+     @media (max-width:768px){
+        font-size: clamp(18px, 1.7vw, 40px);;
+            width: 100%;
+        }
+}
+
+#studio {
+    .hide-image-mobile{
+        @media (max-width:768px){
+            display: none;
+        }
+    }
+}
+
+.artist-img{
+    filter: brightness(0.7);
+}
