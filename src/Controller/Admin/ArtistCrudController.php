@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Artist;
+use App\Service\ImageCompressor;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
@@ -13,19 +14,21 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Override;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
 class ArtistCrudController extends AbstractCrudController
 {
 
     public TagAwareCacheInterface $artistCache;  
-
+    private string $albumPath;
     /**
      * Injects the TagAwareCacheInterface dependency for managing artist cache invalidation.
      */
-    public function __construct(TagAwareCacheInterface $artistCache)
+    public function __construct(TagAwareCacheInterface $artistCache,#[Autowire(param: 'uploads_folder')] string $uploadsFolder)
     {
-       $this->artistCache = $artistCache;
+        $this->artistCache = $artistCache;
+        $this->albumPath = $uploadsFolder . "artists/";
     }
 
 
@@ -40,13 +43,12 @@ class ArtistCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         $albumName = "artists";
-        $imagesFolder = $this->getParameter('uploads_folder') . $albumName;
         return [
             TextField::new('name',"Nome"),
             TextField::new('nameSyllables',"Sillabe (separate con virgole)"),
             ImageField::new('image',"Foto Artista")
                 ->setBasePath('/assets/uploads/' . $albumName)
-                ->setUploadDir($imagesFolder)
+                ->setUploadDir( $this->albumPath)
                 ->setUploadedFileNamePattern('[randomhash].[extension]')
                 ->maxSize('5M',"L'immagine deve essere massimo 5MB")
                 ->mimeTypes("image/png,image/jpeg,image/webp,image/jpg")
@@ -83,6 +85,10 @@ class ArtistCrudController extends AbstractCrudController
     #[Override]
     public function persistEntity(EntityManagerInterface $entityManager, object $entityInstance): void
     {
+        $imageName = $entityInstance->getImage();
+        $imagePath =  $this->albumPath . $imageName;
+        $imageCompressor = new ImageCompressor();
+        $imageCompressor->compress($imagePath);
         $this->artistCache->delete("artists");
         parent::persistEntity($entityManager, $entityInstance);
     }
@@ -94,6 +100,17 @@ class ArtistCrudController extends AbstractCrudController
     #[Override]
     public function updateEntity(EntityManagerInterface $entityManager, object $entityInstance): void
     {
+        $unitofWork = $entityManager->getUnitOfWork();
+        $unitofWork->computeChangeSets();
+        $changeSet = $unitofWork->getEntityChangeSet($entityInstance);
+        if (isset($changeSet['image'][1]) && $changeSet['image'][1] ) {
+            $imageName = $changeSet['image'][1];
+            $imageCompressor = new ImageCompressor();
+            $imagePath = $this->albumPath . $imageName;
+            $imageCompressor->compress($imagePath);
+        }else{
+            $entityInstance->setImage($changeSet['image'][0]);
+        }
         $this->artistCache->delete("artists");
         parent::updateEntity($entityManager, $entityInstance);
     }

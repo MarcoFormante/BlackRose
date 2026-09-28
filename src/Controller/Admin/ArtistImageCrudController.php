@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\ArtistImage;
+use App\Service\ImageCompressor;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
@@ -12,19 +13,21 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use Override;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
 class ArtistImageCrudController extends AbstractCrudController
 {
     public TagAwareCacheInterface $cache;
-
+    public string $albumPath;
     /**
      * Injects the TagAwareCacheInterface dependency for managing cache invalidation.
      */
-    public function __construct(TagAwareCacheInterface $artistCache)
+    public function __construct(TagAwareCacheInterface $artistCache,#[Autowire(param: 'uploads_folder')] string $uploadsFolder)
     {
         $this->cache = $artistCache;
+        $this->albumPath = $uploadsFolder . "artistImages/";
     }
     
     public static function getEntityFqcn(): string
@@ -38,7 +41,6 @@ class ArtistImageCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         $albumName = "artistImages";
-        $imagesFolder = $this->getParameter('uploads_folder') . $albumName;
         return [
             IdField::new('id')->hideOnForm()->hideOnIndex(),
             AssociationField::new('Artist',"Artista"),
@@ -46,7 +48,7 @@ class ArtistImageCrudController extends AbstractCrudController
             // Field for multiple image upload on creation forms
             ImageField::new('files',"Immagine")
                 ->setBasePath('/assets/uploads/' . $albumName)
-                ->setUploadDir($imagesFolder)
+                ->setUploadDir($this->albumPath)
                 ->maxSize('5M',"L'immagine deve essere massimo 5MB")
                 ->mimeTypes("image/png,image/jpeg,image/webp,image/jpg")
                 ->setUploadedFileNamePattern('[randomhash].[extension]')
@@ -55,8 +57,8 @@ class ArtistImageCrudController extends AbstractCrudController
                 ->setFormTypeOptions([
                     'constraints' => [
                         new Assert\Count(
-                            max:10,
-                            maxMessage:'Non puoi caricare più di 10 immagini contemporaneamente.'
+                            max:6,
+                            maxMessage:'Non puoi caricare più di 6 immagini contemporaneamente.'
                         ),
                          new Assert\NotBlank(
                             message:"Devi inserire delle immagini"
@@ -67,7 +69,7 @@ class ArtistImageCrudController extends AbstractCrudController
 
             ImageField::new('path',"Immagine")
                 ->setBasePath('/assets/uploads/' . $albumName)
-                ->setUploadDir($imagesFolder)
+                ->setUploadDir($this->albumPath)
                 ->maxSize('5M',"L'immagine deve essere massimo 5MB")
                 ->mimeTypes("image/png,image/jpeg,image/webp,image/jpg")
                 ->setUploadedFileNamePattern('[randomhash].[extension]')
@@ -100,15 +102,18 @@ class ArtistImageCrudController extends AbstractCrudController
         $files = $entityInstance->getFiles();
         $artist = $entityInstance->getArtist();
         if ($files) {
-            foreach ($files as $key => $file) {
+            $imageCompressor = new ImageCompressor();
+            foreach ($files as $key => $imageName) {
+                   $imagePath = $this->albumPath . $imageName;
                     if ($key === 0) {
-                        $entityInstance->setPath($file);
+                        $entityInstance->setPath($imageName);
                     }else{
                         $ArtistImage = new ArtistImage();
                         $ArtistImage->setArtist($artist);
-                        $ArtistImage->setPath($file);
+                        $ArtistImage->setPath($imageName);
                         $entityManager->persist($ArtistImage);
                     }
+                    $imageCompressor->compress($imagePath);
             }
             // Invalidate the cache for the associated artist
             $this->cache->delete("artist_" . $artist->getId());
@@ -130,14 +135,13 @@ class ArtistImageCrudController extends AbstractCrudController
     #[Override]
      public function deleteEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
-        $albumName= 'artistImages/';
-        $imageName = $entityInstance->getPath(); 
+        $imagePath = $entityInstance->getPath(); 
         $artist = $entityInstance->getArtist();
 
         parent::deleteEntity($entityManager, $entityInstance);
         // Remove the image from server and invalidate cache
-        if ($imageName) {
-            $filePath = $this->getParameter("uploads_folder") . $albumName . $imageName;
+        if ($imagePath) {
+            $filePath = $this->albumPath . $imagePath;
             if (file_exists($filePath)) {
                 unlink($filePath);
             }
