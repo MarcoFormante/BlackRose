@@ -23,8 +23,8 @@ final class HomeController extends AbstractController
         Request $request,
         MixImageRepository $mixImageRepository,
         ArtistRepository $artistRepository, 
-        TagAwareCacheInterface $artistCache, 
-        TagAwareCacheInterface $mixCache,
+        #[Target('artist.cache')] TagAwareCacheInterface $artistCache, 
+        #[Target('mix.cache')] TagAwareCacheInterface $mixCache,
         ArtistImageRepository $artistImageRepository,
         MailService $mailer,
         #[Target('contact_form_limiter')] RateLimiterFactoryInterface $contactFormLimiter
