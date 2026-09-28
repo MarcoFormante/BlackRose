@@ -1,5 +1,5 @@
 <section
-    class="gallery section-margin-top"
+    class="gallery section-margin-top hide-on-start"
     id="galleria"
     data-controller="swiper"
 >
@@ -15,36 +15,18 @@
     >
         <twig:SliderButtons/>
         <div class="swiper-wrapper">
-            {% set halfLength = ((mixAlbum|length )  / 2)|round(0,'ceil') %}
-            {% for image in mixAlbum|slice(0, halfLength ) %}
-                <div class="swiper-slide" data-index="{{loop.index0}}">
+        
+            {% for image in mixAlbum %}
+                <div class="swiper-slide" data-index="{{loop.index0}}" aria-label="Immagini dei tatuaggi - ">
                    <img
                        loading="lazy"
                        src="/assets/uploads/mixAlbum/{{image}}"
-                       alt
+                       alt="Immagine Tattoo {{loop.index}} / {{mixAlbum|length}}"
+                       width="260" 
+                       height="345"
                    />
                 </div>
             {% endfor %}
-           
         </div>          
-    </div>
-
-    {# SECOND SLIDER #}
-    <div class="swiper-mix slider-bottom" data-swiper-target="secondSlider">
-        <div class="swiper-wrapper">
-            {% for image in mixAlbum|slice(halfLength) %}
-                <div class="swiper-slide" data-index="{{loop.index0 + halfLength}}">
-                   <img
-                       loading="lazy"
-                       src="/assets//uploads/mixAlbum/{{image}}"
-                       alt
-                   />
-                </div>
-            {% endfor %}
-              {% if mixAlbum|length is not divisible by(2) %}
-             <div class="swiper-slide swiper-slide-off"></div>
-            {% endif %}
-            
-        </div>
     </div>
 </section>
