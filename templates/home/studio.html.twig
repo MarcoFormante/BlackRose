@@ -1,7 +1,7 @@
 <section
     class="studio section-margin-top"
     id="studio"
-    data-controller="swiper"
+    data-controller="studio"
 >
     <div class="default_padding_x">
         <twig:sectionheading
@@ -11,7 +11,7 @@
     </div>
 
     <div class="studio-images default_padding_x">
-        <ul class="studio-images-container">
+        <ul class="studio-images-container" id="studio-gallery-container">
             <li class="studio-images-item studio-images-item-big studio-text-card-container grid-1">
                 <p class="studio-images-item-text lato-light">
                     Siete alla ricerca di un fantastico studio di tatuaggi? Non cercate oltre! I nostri artisti esperti e di talento lavoreranno con voi per creare un disegno unico che rifletta il vostro stile individuale.
@@ -19,45 +19,53 @@
                 <a href="#info" class="cta_btn cta_btn_inactive lato-black">PRENOTA UN APPUNTAMENTO</a>
             </li>
             <li class="studio-images-item studio-images-item-big grid-2">
-                <img src="/assets/statics/studio/studio-1.webp" alt="">
+                <img src="/assets/statics/studio/studio-1.webp" alt="Foto dello studio Tattoo Black Rose Tattoo 1 / 12" loading="lazy"/>
             </li>
 
             <li class="studio-images-item studio-images-item-big grid-3">
-                <img src="/assets/statics/studio/studio-2.webp" alt="">
+                <img src="/assets/statics/studio/studio-2.webp" alt="Foto dello studio Tattoo Black Rose Tattoo 2 / 12" loading="lazy"/>
             </li>
 
-            <li class="studio-images-item studio-images-item-big grid-4">
-                <img src="/assets/statics/studio/studio-3.webp" alt="">
+            <li class="studio-images-item studio-images-item-big grid-4" id="scrollTarget">
+                <img src="/assets/statics/studio/studio-3.webp" alt="Foto dello studio Tattoo Black Rose Tattoo 3 / 12" loading="lazy"/>
             </li>
             <li class="studio-images-item studio-images-item-big grid-5">
-                <img src="/assets/statics/studio/studio-4.webp" alt="">
+                <img src="/assets/statics/studio/studio-4.webp" alt="Foto dello studio Tattoo Black Rose Tattoo 4 / 12" loading="lazy"/>
             </li>
-            <li class="studio-images-item studio-images-item-big grid-6">
-                 <img src="/assets/statics/studio/studio-5.webp" alt="">
+            <li class="studio-images-item studio-images-item-big grid-6 hide-image-mobile">
+                 <img src="/assets/statics/studio/studio-5.webp" alt="Foto dello studio Tattoo Black Rose Tattoo 5 / 12" loading="lazy"/>
             </li>
-            <li class="studio-images-item studio-images-item-big grid-7">
-                 <img src="/assets/statics/studio/studio-6.webp" alt="">
+            <li class="studio-images-item studio-images-item-big grid-7 hide-image-mobile">
+                 <img src="/assets/statics/studio/studio-6.webp" alt="Foto dello studio Tattoo Black Rose Tattoo 6 / 12" loading="lazy"/>
             </li>
-            <li class="studio-images-item studio-images-item-big grid-8">
-                 <img src="/assets/statics/studio/studio-7.webp" alt="">
+            <li class="studio-images-item studio-images-item-big grid-8 hide-image-mobile">
+                 <img src="/assets/statics/studio/studio-7.webp" alt="Foto dello studio Tattoo Black Rose Tattoo 7 / 12" loading="lazy"/>
             </li>
-            <li class="studio-images-item studio-images-item-big grid-9">
-                 <img src="/assets/statics/studio/studio-8.webp" alt="">
+            <li class="studio-images-item studio-images-item-big grid-9 hide-image-mobile">
+                 <img src="/assets/statics/studio/studio-8.webp" alt="Foto dello studio Tattoo Black Rose Tattoo 8 / 12" loading="lazy"/>
             </li>
-            <li class="studio-images-item studio-images-item-big grid-10">
-                <img src="/assets/statics/studio/studio-8.webp" alt="">
+            <li class="studio-images-item studio-images-item-big grid-10 hide-image-mobile">
+                <img src="/assets/statics/studio/studio-8.webp" alt="Foto dello studio Tattoo Black Rose Tattoo 9 / 12" loading="lazy"/>
             </li>
-            <li class="studio-images-item studio-images-item-big grid-11">
-                 <img src="/assets/statics/studio/studio-10.webp" alt="">
+            <li class="studio-images-item studio-images-item-big grid-11 hide-image-mobile">
+                 <img src="/assets/statics/studio/studio-10.webp" alt="Foto dello studio Tattoo Black Rose Tattoo 10 / 12" loading="lazy"/>
             </li>
-            <li class="studio-images-item studio-images-item-big grid-12">
-                 <img src="/assets/statics/studio/studio-1.webp" alt="">
+            <li class="studio-images-item studio-images-item-big grid-12 hide-image-mobile">
+                 <img src="/assets/statics/studio/studio-1.webp" alt="Foto dello studio Tattoo Black Rose Tattoo 11 / 12" loading="lazy"/>
             </li>
-            <li class="studio-images-item studio-images-item-big grid-13">
-                 <img src="/assets/statics/studio/studio-12.webp" alt="">
+            <li class="studio-images-item studio-images-item-big grid-13 hide-image-mobile">
+                 <img src="/assets/statics/studio/studio-12.webp" alt="Foto dello studio Tattoo Black Rose Tattoo 12 / 12" loading="lazy"/>
             </li>
-            
         </ul>
+
+        <button 
+            class="show-more-btn cta_btn cta_btn_inactive lato-black" data-studio-target="showBtn"
+            disabled
+            aria-expanded="false" 
+            aria-controls="studio-gallery-container"
+        >
+         CARICA ALTRE FOTO
+        </button>
 
     </div>
 </section>
