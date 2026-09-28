@@ -34,12 +34,20 @@
 
         <div class="swiper-wrapper">
             <div class="swiper-slide">
-                <img src="/assets/uploads/artists/{{artist.profileImage}}" alt="">
+                <img class="artist-img" 
+                    src="/assets/uploads/artists/{{artist.profileImage}}" 
+                    alt="Foto del tatuatore {{artist.name}}" 
+                    loading="lazy"
+                />
             </div>
 
             {% for image in artist.images %}
                 <div class="swiper-slide" data-index="{{loop.index}}">
-                    <img src="/assets/uploads/artistImages/{{image.path}}" alt="">
+                    <img 
+                        src="/assets/uploads/artistImages/{{image.path}}" 
+                        alt="Tattoo del tatuatore {{artist.name}} {{loop.index}} / {{artist.images|length}}"
+                        loading="lazy"
+                     />
                 </div>
             {% endfor %}
         </div>
