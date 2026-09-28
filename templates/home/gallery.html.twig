@@ -1,0 +1,32 @@
+<section
+    class="gallery section-margin-top hide-on-start"
+    id="galleria"
+    data-controller="swiper"
+>
+    <div class="default_padding_x">
+        <twig:sectionheading
+            title="GALLERIA"
+            subTitle="Guarda i nostri lavori"
+        />
+    </div>
+    <div
+        class="swiper-mix slider-top slider-margin-top slider"
+        data-swiper-target="slider"
+    >
+        <twig:SliderButtons/>
+        <div class="swiper-wrapper">
+        
+            {% for image in mixAlbum %}
+                <div class="swiper-slide" data-index="{{loop.index0}}" aria-label="Immagini dei tatuaggi - ">
+                   <img
+                       loading="lazy"
+                       src="/assets/uploads/mixAlbum/{{image}}"
+                       alt="Immagine Tattoo {{loop.index}} / {{mixAlbum|length}}"
+                       width="260" 
+                       height="345"
+                   />
+                </div>
+            {% endfor %}
+        </div>          
+    </div>
+</section>

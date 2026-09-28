@@ -1,0 +1,56 @@
+<section
+    class="gallery section-margin-top default_padding_left"
+    id="tatuatori"
+    
+>
+    <div>
+        <twig:sectionheading
+            title="TATUATORI"
+            subTitle="Gli Artisti di Black Rose"
+        />
+    </div>
+
+    {#  LOOP , DATA FROM DB  #}
+    {% for artist in artists %}
+    <div
+        class="swiper-artist slider-margin-top slider slider-artist"
+        data-swiper-target="slider" 
+        data-controller="swiper"
+    >
+        <twig:SliderButtons
+            swiper-navigation-container-relative swiper-navigation-container-between
+        >
+            <h3 class="lato-black">#{{artist.name}}</h3>
+        </twig:SliderButtons>
+
+        <twig:SliderArtistCard 
+            name="{{artist.name}}" 
+            splitName="{{artist.splitName}}"
+            images="{{artist.images|json_encode()}}" 
+            whatsapp="{{artist.whatsapp}}" 
+            instagram="{{artist.insta}}" 
+            facebook="{{artist.facebook}}"
+        />
+
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <img class="artist-img" 
+                    src="/assets/uploads/artists/{{artist.profileImage}}" 
+                    alt="Foto del tatuatore {{artist.name}}" 
+                    loading="lazy"
+                />
+            </div>
+
+            {% for image in artist.images %}
+                <div class="swiper-slide" data-index="{{loop.index}}">
+                    <img 
+                        src="/assets/uploads/artistImages/{{image.path}}" 
+                        alt="Tattoo del tatuatore {{artist.name}} {{loop.index}} / {{artist.images|length}}"
+                        loading="lazy"
+                     />
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</section>

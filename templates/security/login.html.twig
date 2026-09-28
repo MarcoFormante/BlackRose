@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Login{% endblock %}
+
+
+{% block body %}
+
+    <div id="login">
+
+        <div>
+            {% if error %}
+                    <div class="alert alert-error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+
+            {% if app.user %}
+                <div class="alert alert-success">
+                    You are logged in as {{ app.user.userIdentifier }}, <a href="{{ logout_path() }}">Logout</a>
+                </div>
+            {% endif %}
+        </div>
+        <div class="login-box" id="loginBox">
+            <h1 class="lato-regular">Black Rose Tattoo Member Login</h1>
+            <form id="loginForm" method="post" action="{{ path('app_login') }}">
+                <div class="input-group">
+                <label for="username" class="lato-regular">Username</label>
+                    <input type="text" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="username" required autofocus>
+                </div>
+
+                <div class="input-group">
+                    <label for="password" class="lato-regular">Password</label>
+                    <div class="password-wrap">
+                    <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
+                        <button type="button" class="toggle-password" id="togglePass" aria-label="Показать пароль">
+                            <i class="fas fa-eye" id="eyeIcon"></i>
+                        </button>
+                    </div>
+                </div>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                <button type="submit" class="btn-login lato-regular" id="submitBtn">Accedere</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+

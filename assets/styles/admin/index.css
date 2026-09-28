@@ -1,0 +1,13 @@
+
+
+td img{
+    max-block-size: none;
+    max-inline-size: 150px;
+}
+
+.artist-image{
+     width: 36px;
+     object-fit: cover;
+     height: 36px;
+}
+

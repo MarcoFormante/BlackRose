@@ -1,3 +1,42 @@
 .default_padding_x{
     padding-inline: 140px;
 }
+
+.default_padding_left{
+    padding-left: 140px;
+}
+
+.bgColor_transparent{
+    background-color: transparent;
+}
+
+.artist-slider-margin-top{
+    margin-top: 58px;
+}
+
+$spacings: (
+    '0': -2.8px,
+    '1': 0.4px,
+    '2': 1.12px,
+    '3': 1.28px,
+);
+
+@each $key, $value in $spacings {
+    .letter-spacing-#{$key} {
+        letter-spacing: $value;
+    }
+}
+
+
+.hide-desktop{
+    @media (min-width:768px){
+        display: none;
+    }
+}
+
+.hide-mobile{
+    @media (max-width:768px){
+        display: none;
+    }
+}
+

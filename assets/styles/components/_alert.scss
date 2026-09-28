@@ -1,0 +1,39 @@
+
+.alert{
+    position: fixed;
+    top: 0;
+    left:0;
+    width: 100%;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: 'Lato';
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    z-index: 150;
+    opacity: 0;
+    animation: showAlert 5s cubic-bezier(0.215, 0.610, 0.355, 1);
+    padding: 16px;
+    border-top: none;
+    transform: translateY(-100%);
+
+    &-success{
+        border: 2px solid rgb(58, 229, 58);
+        background: rgb(1, 29, 1);
+    }
+
+    &-error{
+        border: 2px solid rgb(215, 63, 81);
+        background: rgb(47, 1, 6);
+    }
+}
+
+@keyframes showAlert {
+    0%,100%{
+        opacity: 0;
+    }
+    20%,80%{
+        opacity: 1;
+        transform: translateY(0%);
+    }
+}
