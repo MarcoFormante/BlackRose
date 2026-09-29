@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}| Pagina non trovata{% endblock %}
+
+{% block meta %}
+    <meta name="robots" content="noindex, nofollow">
+{% endblock %}
+
+
+{% block body %}
+<div class="error-page">
+    <p class="error-page__code">4<span>0</span>4</p>
+    <h1 class="error-page__title">Pagina non trovata</h1>
+    <p class="error-page__text">
+        La pagina che cerchi non esiste o è stata spostata.
+        Controlla che l'indirizzo sia corretto oppure torna alla home.
+    </p>
+    <a href="{{ path('app_home') }}" class="error-page__btn">Torna alla home</a>
+</div>
+{% endblock %}
