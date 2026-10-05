@@ -31,7 +31,7 @@
 .swiper-slide-lightBox{
     width: inherit;
     height: inherit;
-    display: flex;
+    display: flex !important;
     justify-content: center;
     align-items: center;
     cursor: grab;
@@ -41,6 +41,7 @@
     img{
         max-width: 600px;
         max-height: calc(150vw);
+        border-radius: 0;
     }
 }
 
@@ -52,7 +53,7 @@
     position: absolute;
 
     svg{
-        width: 30%;
+        width: 30% !important;
         fill: white;
 
         path{
