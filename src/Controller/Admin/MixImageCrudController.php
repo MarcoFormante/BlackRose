@@ -12,19 +12,24 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use Symfony\Component\Validator\Constraints as Assert; 
 use Override;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
 
 class MixImageCrudController extends AbstractCrudController
 {
     public TagAwareCacheInterface $mixCache;
+    public string $albumPath;
+    public string $thumbsPath;
 
     /**
      * Injects the TagAwareCacheInterface dependency for managing cache invalidation.
      */
-    public function __construct(TagAwareCacheInterface $mixCache)
+    public function __construct(TagAwareCacheInterface $mixCache, #[Autowire(param: 'uploads_folder')] string $uploadsFolder)
     {
         $this->mixCache = $mixCache;
+        $this->albumPath = $uploadsFolder . 'mixAlbum/';
+        $this->thumbsPath = $uploadsFolder . "thumbs/mixAlbum/";
     }
 
     public static function getEntityFqcn(): string
@@ -39,12 +44,11 @@ class MixImageCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         $albumName = "mixAlbum";
-        $imagesFolder =  $this->getParameter('uploads_folder') . $albumName;
         return [
             // Field for uploading multiple images at once in creation forms
            ImageField::new("files","Aggiungi")
                 ->setBasePath("/assets/uploads/" . $albumName)
-                ->setUploadDir($imagesFolder)
+                ->setUploadDir($this->albumPath)
                 ->setUploadedFileNamePattern('[randomhash].webp')
                 ->maxSize('5M',"L'immagine deve essere massimo 5MB")
                 ->mimeTypes("image/png,image/jpeg,image/webp,image/jpg")
@@ -64,7 +68,7 @@ class MixImageCrudController extends AbstractCrudController
             
             ImageField::new("path","Aggiungi immagini")
                 ->setBasePath("/assets/uploads/" . $albumName)
-                ->setUploadDir($imagesFolder)
+                ->setUploadDir($this->albumPath)
                 ->setUploadedFileNamePattern('[randomhash].webp')
                 ->maxSize('5M',"L'immagine deve essere massimo 5MB")
                 ->mimeTypes("image/png,image/jpeg,image/webp,image/jpg")
@@ -84,16 +88,17 @@ class MixImageCrudController extends AbstractCrudController
         $files = $entityInstance->getFiles();
         if ($files) {
             $imageCompressor = new ImageCompressor();
-            foreach ($files as $key => $file) {
-                $filePath = $this->getParameter('uploads_folder') . "mixAlbum/" . $file;
+            foreach ($files as $key => $imageName) {
+                $imagePath = $this->albumPath . $imageName;
                 if ($key === 0) {
-                    $entityInstance->setPath($file);
+                    $entityInstance->setPath($imageName);
                 }else{
                     $image = new MixImage();
-                    $image->setPath($file);
+                    $image->setPath($imageName);
                     $entityManager->persist($image);
                 }
-                $imageCompressor->compress($filePath);
+                $imageCompressor->compress($imagePath);
+                $imageCompressor->createThumbnail($imagePath,$this->thumbsPath . $imageName,397);
         }
 
         // Invalidate the mix album cache entry

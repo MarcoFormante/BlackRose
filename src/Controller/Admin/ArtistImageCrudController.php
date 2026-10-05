@@ -21,6 +21,7 @@ class ArtistImageCrudController extends AbstractCrudController
 {
     public TagAwareCacheInterface $cache;
     public string $albumPath;
+    public string $thumbsPath;
     /**
      * Injects the TagAwareCacheInterface dependency for managing cache invalidation.
      */
@@ -28,6 +29,7 @@ class ArtistImageCrudController extends AbstractCrudController
     {
         $this->cache = $artistCache;
         $this->albumPath = $uploadsFolder . "artistImages/";
+        $this->thumbsPath = $uploadsFolder . "thumbs/artistImages/";
     }
     
     public static function getEntityFqcn(): string
@@ -46,18 +48,18 @@ class ArtistImageCrudController extends AbstractCrudController
             AssociationField::new('Artist',"Artista"),
 
             // Field for multiple image upload on creation forms
-            ImageField::new('files',"Immagine")
+            ImageField::new('files',"Carica immagini (massimo 6 foto alla volta)")
                 ->setBasePath('/assets/uploads/' . $albumName)
                 ->setUploadDir($this->albumPath)
                 ->maxSize('5M',"L'immagine deve essere massimo 5MB")
                 ->mimeTypes("image/png,image/jpeg,image/webp,image/jpg")
-                ->setUploadedFileNamePattern('[randomhash].[extension]')
+                ->setUploadedFileNamePattern('[randomhash].webp')
                 ->setFormTypeOption('multiple',true)
                 ->hideOnIndex()
                 ->setFormTypeOptions([
                     'constraints' => [
                         new Assert\Count(
-                            max:6,
+                            max:20,
                             maxMessage:'Non puoi caricare più di 6 immagini contemporaneamente.'
                         ),
                          new Assert\NotBlank(
@@ -114,6 +116,7 @@ class ArtistImageCrudController extends AbstractCrudController
                         $entityManager->persist($ArtistImage);
                     }
                     $imageCompressor->compress($imagePath);
+                    $imageCompressor->createThumbnail($imagePath, $this->thumbsPath . $imageName,397);
             }
             // Invalidate the cache for the associated artist
             $this->cache->delete("artist_" . $artist->getId());
@@ -144,6 +147,10 @@ class ArtistImageCrudController extends AbstractCrudController
             $filePath = $this->albumPath . $imagePath;
             if (file_exists($filePath)) {
                 unlink($filePath);
+            }
+             $thumb = $this->thumbsPath . $imagePath;
+            if (file_exists($thumb)) {
+                unlink($thumb);
             }
             $this->cache->delete("artist_" . $artist->getId());
         }
