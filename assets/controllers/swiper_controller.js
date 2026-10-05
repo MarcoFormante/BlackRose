@@ -1,86 +1,113 @@
 import { Controller } from '@hotwired/stimulus';
-
-
+import Swiper from 'swiper';
+import {Grid,Navigation} from "swiper/modules"
 
 /* stimulusFetch: 'lazy' */
 export default class extends Controller {
     static targets = ['slider']
 
+     static values = {
+        slideWidth: { default: 260 },
+        gap: {  default: 16 },
+        rows: {  default: 2 },   
+    };
+
+
     initialize(){
         this.showLightBox = this.showLightBox.bind(this)
+        this.perView = this.perView.bind(this)
     }
 
     connect() {
+        this.beforeCache = () => this.destroy();
+        document.addEventListener('turbo:before-cache', this.beforeCache);
         this.element.classList.add('hide-on-start-off');
         
         if (!this.hasSliderTarget) return
-        // Initialize the primary Swiper carousel
+        
         if (!this.sliderTarget.classList.contains("swiper-mix")) {
                 this.swiper = new Swiper(this.sliderTarget, {
+                modules:[Navigation],
                 slidesPerView: 'auto',
-                spaceBetween: 16,
+                resistance: true,
+                freeMode: false,
                 navigation:{
                     nextEl: '.slider-button-next',
                     prevEl: '.slider-button-prev',
                 },
-                lazy:{
-                    enable:true
-                },
-            });
+                 on: {
+                        click:this.showLightBox
+                    },
+                });
         }else{
+        
             this.swiper = new Swiper(this.sliderTarget, {
-                modules: [Swiper.Grid, Swiper.Navigation],
-                slidesPerView: 'auto',
-                spaceBetween: 16,
-                grid: {
-                    rows: 1,
-                    fill: 'row',
-                },
-                breakpoints: {
-                    768: { 
-                    grid: {
-                        rows: 2, 
+                    modules: [Navigation, Grid],
+                    spaceBetween: this.gapValue,
+                    slidesPerView: this.perView(),
+                    resistance: true,
+                    freeMode: false,
+                    grid: { rows: 1 },
+                    breakpoints: {
+                        700: {  slidesPerView: this.perView(), grid: { rows: this.rowsValue, fill: 'row' } },
                     },
+                    navigation: {
+                        nextEl: this.element.querySelector('.slider-button-next'),
+                        prevEl: this.element.querySelector('.slider-button-prev'),
                     },
-                },
-                navigation:{
-                    nextEl: '.slider-button-next',
-                    prevEl: '.slider-button-prev',
-                },
-                    
-            });
-        }
-       
-        this.swiper.on('click', this.showLightBox);
+                    on: {
+                        resize: (swiper) => {
+                            swiper.params.slidesPerView = this.perView();
+                            swiper.update()
+                        },
+                        click:this.showLightBox
+                    },
+                });
+                
+            }
+
+           
     }
-    /**
-     * Destroys Swiper instances to prevent memory leaks when the controller is disconnected from the DOM.
-     */
+
+    perView() {
+        const width = this.sliderTarget.clientWidth;
+        return Math.max(1, (width + this.gapValue) / (this.slideWidthValue + this.gapValue)).toFixed(1);
+    }
+       
+    destroy() {
+        this.swiper?.destroy(true, true);
+        this.swiper = null;
+    }
+       
+       
+
     disconnect() {
-       if (this.swiper) {
-            this.swiper.destroy(true,true)
-       }
-       if (this.swiperBottom) {
-             this.swiperBottom.destroy(true,true)
-       }
+        document.removeEventListener('turbo:before-cache', this.beforeCache);
+        this.destroy();
     }
 
 
     showLightBox(sw){
-            if (!sw.clickedSlide) {
+            const clickedSlide = sw.clickedSlide;
+            
+            if (!clickedSlide.dataset?.index ) {
                 return
             }
+            
             const container = document.querySelector(".swiper-wrapper-lightBox")
+            
             if (!container.innerHTML) {
                 let index = sw.clickedSlide.dataset.index
-             
+                
                 const lightBox = document.querySelector(".swiper-lightBox");
                 const slides = sw.slides
                 
                 slides.forEach(slide => {
                     if(slide.hasChildNodes()){
                         const image = document.createElement("img")
-                        image.src = slide.querySelector("img").src
+                        image.src = slide.dataset.full ?? slide.querySelector('img').src
+                        image.loading = "lazy"
+                        image.decoding = "async"
                         const swiperSlide = document.createElement("div")
                         swiperSlide.classList.add("swiper-slide")
                         swiperSlide.classList.add("swiper-slide-lightBox")
@@ -88,9 +115,12 @@ export default class extends Controller {
                         container.appendChild(swiperSlide)
                     }
                 });
+                
                 lightBox.classList.add("swiper-lightBox-active")
                 lightBox.dataset.clickedSlide = index 
                 document.querySelector("#lightbox").setAttribute("data-controller","lightbox")
+                 
+                 
         }
     }
 }
