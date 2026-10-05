@@ -27,13 +27,12 @@
         </div>
         <div class="footer-items-container">
             <p>
-                <a class="p_privacy" href="/politica-sulla-privacy">
-                    Politica sulla privacy
-                </a>
+                <a class="p_privacy" href="{{ path('app_privacy') }}" data-turbo="false">Politica sulla privacy</a>
             </p>
         </div>
         <div class="footer-items-container">
-            <p class="p-iva">Partita IVA 90221917467362900</p>
+            {#<p class="p-iva">Partita IVA 90221917467362900</p>#}
+            <p class="p-iva"></p>
         </div>
     </div>
 </footer>

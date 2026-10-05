@@ -4,7 +4,7 @@
     
 >
     <div>
-        <twig:sectionheading
+        <twig:SectionHeading
             title="TATUATORI"
             subTitle="Gli Artisti di Black Rose"
         />
@@ -37,16 +37,22 @@
                 <img class="artist-img" 
                     src="/assets/uploads/artists/{{artist.profileImage}}" 
                     alt="Foto del tatuatore {{artist.name}}" 
-                    loading="lazy"
+                    loading="lazy" 
+                    decoding="async"
+                    width="397"
+                    height="560"
                 />
             </div>
 
             {% for image in artist.images %}
-                <div class="swiper-slide" data-index="{{loop.index}}">
+                <div class="swiper-slide" data-index="{{loop.index}}" data-full="/assets/uploads/artistImages/{{image.path}}">
                     <img 
-                        src="/assets/uploads/artistImages/{{image.path}}" 
+                        src="/assets/uploads/thumbs/artistImages/{{image.path}}" 
                         alt="Tattoo del tatuatore {{artist.name}} {{loop.index}} / {{artist.images|length}}"
-                        loading="lazy"
+                        loading="lazy" 
+                        decoding="async"
+                        width="397"
+                        height="560"
                      />
                 </div>
             {% endfor %}

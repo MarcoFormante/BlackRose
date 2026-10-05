@@ -4,12 +4,13 @@
    <meta name="description" content="Black Rose Tattoo Studio a Messina: tatuaggi personalizzati, artisti esperti, studio moderno in Via Regina Margherita 5. Prenota il tuo appuntamento.">
    <meta name="keywords" content="tatuaggi Messina, tattoo studio Messina, tatuatori Messina, Black Rose Tattoo">
    <meta name="robots" content="index, follow">
-   <link rel="canonical" href="https://www.blackrosetattoomessina.it/">
+   <link rel="canonical" href="https://blackrosetattoomessina.it/">
+   <meta name="turbo-cache-control" content="no-cache">
    <meta property="og:type" content="business.business">
    <meta property="og:title" content="Black Rose Tattoo Studio Messina">
    <meta property="og:description" content="Tatuaggi personalizzati a Messina. Scopri la galleria, i nostri artisti e prenota il tuo appuntamento.">
    <meta property="og:image" content="{{ absolute_url(asset('images/meta_logo.webp')) }}">
-   <meta property="og:url" content="https://www.blackrosetattoomessina.it/">
+   <meta property="og:url" content="https://blackrosetattoomessina.it/">
    <meta property="og:site_name" content="Black Rose Tattoo Studio">
    <meta property="og:locale" content="it_IT">
    <meta name="twitter:card" content="summary_large_image">
@@ -22,7 +23,7 @@
        "@type": "TattooParlor",
        "name": "Black Rose Tattoo Studio",
        "image": "{{ absolute_url(asset('images/meta_logo.webp')) }}",
-       "url": "https://www.blackrosetattoomessina.it/",
+       "url": "https://blackrosetattoomessina.it/",
        "telephone": "+393392191992",
        "email": "blackroseta2studio@gmail.com",
        "address": {
@@ -60,15 +61,32 @@
 
 
 {% block body %}
- {% include "layout/header.html.twig" %}
- <main>
-    <twig:lightbox/>
+    {# {% cache "home_header;v2" ttl(86400) %} #}
+        {% include "layout/header.html.twig" %}
+    {# {% endcache %} #}
+    <main>
+        <twig:Lightbox/>
+        {# {% cache "home_hero;v2" ttl(86400) %} #}
+            {% include "home/hero.html.twig" %}
+        {# {% endcache %} #}
 
-    {% include "home/hero.html.twig" %}
-    {% include "home/gallery.html.twig" %}
-    {% include "home/artistGallery.html.twig" %}
-    {% include "home/studio.html.twig" %}
-    {% include "home/info.html.twig" %}
- </main>
-   {% include "home/footer.html.twig" %}
+        {# {% cache "home_gallery;v2" ttl(43200) %} #}
+            {% include "home/gallery.html.twig" %}
+        {# {% endcache %} #}
+
+        {# {% cache "home_artistGallery;v2" ttl(43200) %} #}
+            {% include "home/artistGallery.html.twig" %}
+        {# {% endcache %} #}
+
+        {# {% cache "home_studio;v2" ttl(86400) %} #}
+            {% include "home/studio.html.twig" %}
+        {# {% endcache %} #}
+
+        {% include "home/info.html.twig" %}
+    </main>
+    {# {% cache "home_footer;v3" ttl(86400) %} #}
+        {% include "home/footer.html.twig" %}
+    {# {% endcache %} #}
 {% endblock %}
+
+

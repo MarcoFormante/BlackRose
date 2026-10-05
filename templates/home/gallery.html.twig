@@ -4,7 +4,7 @@
     data-controller="swiper"
 >
     <div class="default_padding_x">
-        <twig:sectionheading
+        <twig:SectionHeading
             title="GALLERIA"
             subTitle="Guarda i nostri lavori"
         />
@@ -17,13 +17,15 @@
         <div class="swiper-wrapper">
         
             {% for image in mixAlbum %}
-                <div class="swiper-slide" data-index="{{loop.index0}}" aria-label="Immagini dei tatuaggi - ">
+                <div class="swiper-slide" data-index="{{loop.index0}}" aria-label="Immagini dei tatuaggi - " data-full="/assets/uploads/mixAlbum/{{image}}">
                    <img
                        loading="lazy"
-                       src="/assets/uploads/mixAlbum/{{image}}"
+                       src="/assets/uploads/thumbs/mixAlbum/{{image}}"
                        alt="Immagine Tattoo {{loop.index}} / {{mixAlbum|length}}"
                        width="260" 
                        height="345"
+                       loading="lazy" 
+                       decoding="async"
                    />
                 </div>
             {% endfor %}
