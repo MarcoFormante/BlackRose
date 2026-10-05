@@ -1,6 +1,6 @@
 import { Controller } from '@hotwired/stimulus';
-
-
+import Swiper from "swiper"
+import { Navigation, Pagination } from 'swiper/modules';
 
 /* stimulusFetch: 'lazy' */
 export default class extends Controller {
@@ -16,18 +16,16 @@ export default class extends Controller {
         }
         
         this.swiper = new Swiper(this.lightboxTarget, {
+                        modules:[Navigation],
                         slidesPerView: 1,
                         spaceBetween: 16,
+                        initialSlide:this.lightboxTarget.dataset.clickedSlide,
                         navigation:{
                             nextEl: '.swiper-button-next-lightbox',
                             prevEl: '.swiper-button-prev-lightbox',
                         },
-                        lazy:{
-                            enable:true
-                        },
                     });
 
-            this.swiper.slideTo(this.lightboxTarget.dataset.clickedSlide,0)
 
             if (this.hasExitTarget) {
                 this.exitTarget.addEventListener("click",this.closeLightBox)
@@ -38,6 +36,7 @@ export default class extends Controller {
     disconnect() {
         if (this.swiper) {
             this.swiper.destroy(true,true)
+            this.swiper = null
         }
         if (this.hasExitTarget) {
             this.exitTarget.removeEventListener("click", this.closeLightBox)
@@ -49,6 +48,7 @@ export default class extends Controller {
             return 
         }
         this.wrapperTarget.innerHTML = ""
+        this.swiper.destroy(true,true)
         this.lightboxTarget.classList.remove("swiper-lightBox-active")
         this.element.removeAttribute("data-controller")
     }
