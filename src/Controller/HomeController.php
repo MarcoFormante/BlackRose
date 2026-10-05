@@ -33,6 +33,7 @@ final class HomeController extends AbstractController
         $form->handleRequest($request);
 
         $errors = [];
+        $success = null;
         $response = new Response();
 
         // Retrieve and cache the mixed image album (expires in 8600 seconds)
@@ -100,12 +101,8 @@ final class HomeController extends AbstractController
                 $sent = $mailer->sendMail($form);
                 if ($sent) {
                     $response->setStatusCode(Response::HTTP_OK);
-                    return $this->render('home/index.html.twig', [
-                        'form'     => $this->createForm(ClientRequestType::class),
-                        'success'  => 'Messaggio inviato con successo!',
-                        'mixAlbum' => $albumMix,
-                        'artists'  => $artists,
-                    ], $response);
+                    $form = $this->createForm(ClientRequestType::class);
+                    $success  = 'Messaggio inviato con successo!';
                 }
             } else {
                 // Form is invalid: set HTTP 422 for Hotwire Turbo compatibility
@@ -120,11 +117,11 @@ final class HomeController extends AbstractController
         }
 
         // Render template for initial GET request or failed form validation
-        return $this->render('home/index.html.twig', [
+        return $this->render('home/index.html.twig', array_merge([
             'form'     => $form,
             'errors'   => $errors,
             'mixAlbum' => $albumMix,
             'artists'  => $artists,
-        ], $response);
+        ],$success ? ['success' => $success] : []), $response);
     }
 }
