@@ -27,8 +27,8 @@ return [
     '@hotwired/stimulus' => ['version' => '3.2.2'],
     '@symfony/stimulus-bundle' => ['path' => './vendor/symfony/stimulus-bundle/assets/dist/loader.js'],
     '@hotwired/turbo' => ['version' => '8.0.23'],
-    'admin' => [
-        'path' => './assets/admin.js',
-        'entrypoint' => true,
-    ],
+    'admin' => ['path' => './assets/admin.js', 'entrypoint' => true],
+    'swiper' => ['version' => '14.3.0'],
+    'swiper/swiper-bundle.min.css' => ['version' => '14.3.0', 'type' => 'css'],
+    'swiper/modules' => ['version' => '14.3.0'],
 ];
