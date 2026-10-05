@@ -49,7 +49,7 @@ class ArtistCrudController extends AbstractCrudController
             ImageField::new('image',"Foto Artista")
                 ->setBasePath('/assets/uploads/' . $albumName)
                 ->setUploadDir( $this->albumPath)
-                ->setUploadedFileNamePattern('[randomhash].[extension]')
+                ->setUploadedFileNamePattern('[randomhash].webp')
                 ->maxSize('5M',"L'immagine deve essere massimo 5MB")
                 ->mimeTypes("image/png,image/jpeg,image/webp,image/jpg")
                 ->setRequired($pageName === "edit" ? false : true)
@@ -109,7 +109,9 @@ class ArtistCrudController extends AbstractCrudController
             $imagePath = $this->albumPath . $imageName;
             $imageCompressor->compress($imagePath);
         }else{
-            $entityInstance->setImage($changeSet['image'][0]);
+           if (isset($changeSet['image'][0]) && $changeSet['image'][0] ) {
+                $entityInstance->setImage($changeSet['image'][0]);
+            }
         }
         $this->artistCache->delete("artists");
         parent::updateEntity($entityManager, $entityInstance);
